@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<menuitem label="File">
+		<menuitem label="New" dest="newFile" />
+		<menuitem label="Open" dest="openFile" />
+		<menuitem label="Save" dest="saveFile" />
+		<menuitem type="separator" />
+		<menuitem label="settings" dest="settingsPanel"/>
+	</menuitem>
+	<menuitem label="Export">
+		<menuitem label="Export as AS 3.0" dest="exportAS3"/>
+		<menuitem label="Export as SWC" dest="exportSWC"/>
+		<menuitem label="Export as SWF" dest="exportSWF"/>
+	</menuitem>
+	<menuitem label="about">
+		<menuitem label="About the developer" dest="aboutPanel"/>
+		<menuitem label="donate..." dest="paypal"/>
+		<menuitem label="help" dest="help"/>
+		<menuitem label="info" dest="info"/>
+	</menuitem>
+</menu>

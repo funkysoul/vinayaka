@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table>
+	<item>
+		<label>U+0000 ... U+007F: Basic Latin</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Latin 1 Supplement</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Latin A Extended</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Latin B Extended</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: IPA Extensions</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Spacing Modifer Letters</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Diacritical Marks</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Greek & Coptic</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Cyrillic</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Cyrillic Supplement</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Armenian</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Hebrew</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Arabic</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Syriac</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Arabic Supplement</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Thaana</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: NKo</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Samaritan</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Devanagari</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Bengali</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Basic Latin</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Basic Latin</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Basic Latin</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Basic Latin</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Basic Latin</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Basic Latin</label>
+		<data>U+000-U+007F</data>
+	</item>
+</table>
