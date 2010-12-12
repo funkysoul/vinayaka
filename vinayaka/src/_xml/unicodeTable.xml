@@ -5,15 +5,15 @@
 		<data>U+000-U+007F</data>
 	</item>
 	<item>
-		<label>U+0000 ... U+007F: Latin 1 Supplement</label>
+		<label>U+0080 ... U+00FF: Latin 1 Supplement</label>
 		<data>U+000-U+007F</data>
 	</item>
 	<item>
-		<label>U+0000 ... U+007F: Latin A Extended</label>
+		<label>U+0100 ... U+017F: Latin A Extended</label>
 		<data>U+000-U+007F</data>
 	</item>
 	<item>
-		<label>U+0000 ... U+007F: Latin B Extended</label>
+		<label>U+0180 ... U+024F: Latin B Extended</label>
 		<data>U+000-U+007F</data>
 	</item>
 	<item>
@@ -57,19 +57,7 @@
 		<data>U+000-U+007F</data>
 	</item>
 	<item>
-		<label>U+0000 ... U+007F: Arabic Supplement</label>
-		<data>U+000-U+007F</data>
-	</item>
-	<item>
 		<label>U+0000 ... U+007F: Thaana</label>
-		<data>U+000-U+007F</data>
-	</item>
-	<item>
-		<label>U+0000 ... U+007F: NKo</label>
-		<data>U+000-U+007F</data>
-	</item>
-	<item>
-		<label>U+0000 ... U+007F: Samaritan</label>
 		<data>U+000-U+007F</data>
 	</item>
 	<item>
@@ -81,27 +69,151 @@
 		<data>U+000-U+007F</data>
 	</item>
 	<item>
-		<label>U+0000 ... U+007F: Basic Latin</label>
+		<label>U+0000 ... U+007F: Gurmukhi</label>
 		<data>U+000-U+007F</data>
 	</item>
 	<item>
-		<label>U+0000 ... U+007F: Basic Latin</label>
+		<label>U+0000 ... U+007F: Gujarati</label>
 		<data>U+000-U+007F</data>
 	</item>
 	<item>
-		<label>U+0000 ... U+007F: Basic Latin</label>
+		<label>U+0000 ... U+007F: Oriya</label>
 		<data>U+000-U+007F</data>
 	</item>
 	<item>
-		<label>U+0000 ... U+007F: Basic Latin</label>
+		<label>U+0000 ... U+007F: Tamil</label>
 		<data>U+000-U+007F</data>
 	</item>
 	<item>
-		<label>U+0000 ... U+007F: Basic Latin</label>
+		<label>U+0000 ... U+007F: Telugu</label>
 		<data>U+000-U+007F</data>
 	</item>
 	<item>
-		<label>U+0000 ... U+007F: Basic Latin</label>
+		<label>U+0000 ... U+007F: Kannada</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Malayalam</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Sinhala</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Thai</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Lao</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Tibetan</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Myanmar</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Georgian</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Hangul Jamo</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Ethiopic</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Cherokee</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Unified Canadian Aboriginal Syllabics</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Ogham</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Runic</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Tagalog</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Hanunoo</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Buhid</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Tagbanwa</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Hanunoo</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Buhid</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Tagbanwa</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Khmer</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Mongolian</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Limbu</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Tai Le</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Khmer Symbols</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Phonetic Extensions</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Latin Extended Additional</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Greek Extended</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: General Punctuation</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Superscripts and SubScripts</label>
+		<data>U+000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0000 ... U+007F: Currency Symbols</label>
 		<data>U+000-U+007F</data>
 	</item>
 </table>

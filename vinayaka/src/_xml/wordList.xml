@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<german>
+</german>
+<english>
+	<tooltip_sdk>Please select the folder to your FLEX SDK (normally: c:/program files/Adobe/Flash Builder/SDKs/)</tooltip_sdk>
+	<tooltip_font>Please select the folder of your system fonts or simply your folder with the fonts you wish to use.</tooltip_font>
+</english>
+<french>
+</french>
