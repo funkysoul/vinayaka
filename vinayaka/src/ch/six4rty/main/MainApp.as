@@ -12,17 +12,23 @@ package ch.six4rty.main
 
 	public class MainApp
 	{
-		public var prefHandler				:PreferencesHandler			= PreferencesHandler.getInstance();
-		public var stateHandler				:StateHandler				= StateHandler.getInstance();
+		[Bindable]
+		public var appSettings				:ApplicationSettings		= ApplicationSettings.getInstance();
+		
+		[Bindable]
+		public var userSettings				:UserSettings				= UserSettings.getInstance();
 		
 		[Bindable] 
 		public var dragHandler				:DragHandler				= DragHandler.getInstance();
 		
+		public var prefHandler				:PreferencesHandler			= PreferencesHandler.getInstance();
+		public var stateHandler				:StateHandler				= StateHandler.getInstance();
+		
+		
 		private var tt						:IToolTip;
 		
-		public function MainApp()
-		{
-		}
+		
+		public function MainApp(){}
 		
 		public function displaytooltip( str:String ):void
 		{
@@ -49,5 +55,6 @@ package ch.six4rty.main
 					break;
 			}
 		}
+
 	}
 }
