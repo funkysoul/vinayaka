@@ -33,13 +33,12 @@
 						break;
 				}
 			}
-
 		]]>
 	</fx:Script>
 	
 	<s:HGroup width="100%" height="100%" verticalAlign="middle" paddingLeft="2" paddingRight="2" paddingTop="2" paddingBottom="2">
 		<s:Label text="{data.label}" width="100%"/>
-		<s:Button id="btn" accentColor="red" emphasized="true" width="12" height="12" mouseDown="btn_mouseDownHandler(event)"/>
+		<s:Button id="btn" width="16" height="16" accentColor="red" emphasized="true" mouseDown="btn_mouseDownHandler(event)"/>
 	</s:HGroup>
 	
 </s:ItemRenderer>

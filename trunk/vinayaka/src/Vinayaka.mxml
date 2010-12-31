@@ -3,12 +3,11 @@
 					   xmlns:s="library://ns.adobe.com/flex/spark"
 					   xmlns:mx="library://ns.adobe.com/flex/mx"
 					   width="979" height="248" currentState="DefaultState"
-					   height.DefaultState="276"  creationComplete="init()">
+					   height.DefaultState="248"  creationComplete="init()">
 	
 	<s:states>
 		<s:State name="DefaultState"/>
 		<s:State name="State_Unicode"/>
-		<s:State name="State_ExtraChars"/>
 		<s:State name="State_Generation"/>
 		<s:State name="State_Preferences"/>
 	</s:states>
@@ -25,9 +24,6 @@
 				_vinayaka			= new MainApp();
 				
 				_vinayaka.appSettings.initApplication();
-				
-				addEventListener( NativeDragEvent.NATIVE_DRAG_ENTER, _vinayaka.dragHandler.onDragIn );
-				addEventListener( NativeDragEvent.NATIVE_DRAG_DROP, _vinayaka.dragHandler.onDragDrop );
 			}
 		]]>
 	</fx:Script>
@@ -41,16 +37,19 @@
 			  enabled.DefaultState="false"/>
 	<s:Button id="btnSelectUnicode" x="0" y="49" width="204" height="50" label="Select Unicode"
 			  click="_vinayaka.stateHandler.stateChange( event )"
-			  enabled.State_Unicode="false"/>
-	<s:Button id="btnSelectExtraChars" x="0" y="99" width="204" height="50"
-			  label="Select Extra Characters" click="_vinayaka.stateHandler.stateChange( event )"
-			  enabled.State_ExtraChars="false"/>
+			  label.State_Unicode="Select Unicode &amp; Extra Chars" enabled.State_Unicode="false"/>
 	<s:Button id="btnSelectGenerate" x="0" y="149" width="204" height="50" label="Generate"
 			  click="_vinayaka.stateHandler.stateChange( event )"
-			  enabled.State_Generation="false"/>
+			  x.DefaultState="0" y.DefaultState="99"
+			  x.State_Generation="0" y.State_Generation="99" enabled.State_Generation="false"
+			  x.State_Preferences="0" y.State_Preferences="99"
+			  x.State_Unicode="0" y.State_Unicode="99"/>
 	<s:Button id="btnSelectPrefs" x="0" y="199" width="204" height="50" label="Preferences"
 			  click="_vinayaka.stateHandler.stateChange( event )"
-			  enabled.State_Preferences="false"/>
+			  x.DefaultState="0" y.DefaultState="149"
+			  x.State_Generation="0" y.State_Generation="149"
+			  x.State_Preferences="0" y.State_Preferences="149" enabled.State_Preferences="false"
+			  x.State_Unicode="0" y.State_Unicode="149"/>
 	<s:Label includeIn="State_Preferences" x="216" y="99" fontSize="14" text="Folder to Flex SDK"/>
 	<s:TextInput id="sdkLoc" includeIn="State_Preferences" x="341" y="93" width="248"
 				 borderAlpha="0.52" borderVisible="true" enabled="true"/>
@@ -69,26 +68,27 @@
 	<s:Image id="sdkInfo0" includeIn="State_Preferences" x="588" y="134" scaleMode="letterbox"
 			 smooth="false" source="images/appIcons/info.png" 
 			 rollOut="_vinayaka.hidetooltip()" rollOver="_vinayaka.displaytooltip( 'asdasdasdasdadsdadasd' )"/>
-	<mx:VRule includeIn="DefaultState" x="210" y="10" width="1" height="249"/>
-	<s:List id="DropInFont" includeIn="DefaultState" x="217" y="23" width="240" height="189"
-			dataProvider="{_vinayaka.dragHandler.fontCollection}" enabled="true"
+	<mx:VRule includeIn="DefaultState" x="210" y="9" width="1" height="230"/>
+	<s:List id="FontList" includeIn="DefaultState" x="217" y="23" width="240" height="189"
+			dataProvider="{_vinayaka.appSettings.fontCollection}" labelField="url" enabled="true"
 			itemRenderer="ch.six4rty.renderer.FontItemRenderer"></s:List>
 	<mx:VRule includeIn="State_Generation" x="469" y="10" width="2" height="228"/>
 	<s:Button includeIn="State_Generation" x="227" y="110" width="213" height="94"
-			  label="Generate AS3" fontSize="21" click="_vinayaka.generateProduct('as3')"/>
+			  label="Generate AS3" fontSize="21" click="_vinayaka.coreClasses.GenerateFontFile('as3')"/>
 	<mx:VRule includeIn="State_Generation" x="729" y="10" width="2" height="228"/>
 	<s:Button includeIn="State_Generation" x="497" y="110" width="213" height="94"
-			  label="Generate SWC" fontSize="21" click="_vinayaka.generateProduct('swc')"/>
+			  label="Generate SWC" fontSize="21" click="_vinayaka.coreClasses.GenerateFontFile('swc')"/>
 	<s:Button includeIn="State_Generation" x="747" y="110" width="213" height="94"
-			  label="Generate SWF" fontSize="21" click="_vinayaka.generateProduct('swf')"/>
+			  label="Generate SWF" fontSize="21" click="_vinayaka.coreClasses.GenerateFontFile('swf')"/>
 	<s:Image includeIn="State_Generation" x="297" y="33" source="images/appIcons/exp_icon_as.png"/>
 	<s:Image includeIn="State_Generation" x="558" y="33" source="images/appIcons/exp_icon_swc.png"/>
 	<s:Image includeIn="State_Generation" x="828" y="33" source="images/appIcons/exp_icon_swf.png"/>
-	<s:Button includeIn="DefaultState" x="217" y="216" width="117" label="Add Typeface" icon="@Embed(source='images/appIcons/add.png')"/>
-	<s:Button includeIn="DefaultState" x="340" y="216" width="117" label="Add Font Folder"/>
-	<s:ComboBox includeIn="State_Unicode" id="charset" x="212" y="49" width="300"
+	<s:Button includeIn="DefaultState" x="217" y="216" width="117" label="Add Typeface" icon="@Embed(source='images/appIcons/add.png')" click="{ _vinayaka.appSettings.chooseSingleFile() }"/>
+	<s:Button includeIn="DefaultState" x="340" y="216" width="117" label="Add Font Folder" click="{ _vinayaka.appSettings.chooseFontFolder() }"/>
+	<s:ComboBox includeIn="State_Unicode" id="charset" x="214" y="71" width="322"
 				dataProvider="{ _vinayaka.appSettings.unicodeTable }" change="{ _vinayaka.userSettings.unicodeHandler() }"/>
-	<s:List id="UnicodeList" includeIn="State_Unicode" x="520" y="49" width="320" height="150"
+	<s:List id="UnicodeList" includeIn="State_Unicode" x="213" y="102" width="322" height="140"
 			itemRenderer="ch.six4rty.renderer.DeletableItemRenderer" dataProvider="{ _vinayaka.userSettings.unicodeListAC }"></s:List>
+	<mx:VRule includeIn="State_Unicode" x="554" y="10" width="4" height="228"/>
 	
 </s:WindowedApplication>
