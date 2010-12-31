@@ -2,20 +2,38 @@ package ch.six4rty.main
 {
 	import nl.demonsters.debugger.MonsterDebugger;
 
-	public class VinayakaCore
+	public final class VinayakaCore 
 	{
+		private static var instance				:VinayakaCore		= new VinayakaCore();
 		
-		public static function GenerateAS3():void
+		private var _endProduct					:String;
+		
+		public function VinayakaCore():void
 		{
-			MonsterDebugger.trace(VinayakaCore, "Create AS3" );
+			if ( instance ) throw new Error( "Singleton can be only accessed through getInstance(); method" );
 		}
-		public static function GenerateSWC():void
+		
+		public static function getInstance():VinayakaCore
 		{
-			MonsterDebugger.trace(VinayakaCore, "Create SWC" );
+			return instance;
 		}
-		public static function GenerateSWF():void
+		
+		
+		
+		public function GenerateFontFile( str:String ):void
 		{
-			MonsterDebugger.trace(VinayakaCore, "Create SWF" );
-		}
+			switch( str )
+			{
+				case "as3":
+					//
+					break;
+				case "swf":
+					//
+					break;
+				case "swc":
+					//
+					break;
+			}
+		}		
 	}
 }

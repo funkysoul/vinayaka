@@ -34,7 +34,7 @@ package ch.six4rty.main
 				var files:Array = evt.clipboard.getData( ClipboardFormats.FILE_LIST_FORMAT ) as Array;
 				if ( files.length == 1 )
 				{
-					DragManager.acceptDragDrop( FlexGlobals.topLevelApplication.DropInFont );
+					DragManager.acceptDragDrop( FlexGlobals.topLevelApplication.FontList );
 				}
 			}
 		}

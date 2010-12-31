@@ -16,6 +16,9 @@ package ch.six4rty.main
 		public var appSettings				:ApplicationSettings		= ApplicationSettings.getInstance();
 		
 		[Bindable]
+		public var coreClasses				:VinayakaCore				= VinayakaCore.getInstance();
+				
+		[Bindable]
 		public var userSettings				:UserSettings				= UserSettings.getInstance();
 		
 		[Bindable] 
@@ -39,22 +42,5 @@ package ch.six4rty.main
 		{
 			ToolTipManager.destroyToolTip( tt );
 		}
-		
-		public function generateProduct( str:String ):void
-		{
-			switch ( str )
-			{
-				case "as3":
-					VinayakaCore.GenerateAS3();
-					break;
-				case "swc":
-					VinayakaCore.GenerateSWC();
-					break;
-				case "swf":
-					VinayakaCore.GenerateSWF();
-					break;
-			}
-		}
-
 	}
 }
