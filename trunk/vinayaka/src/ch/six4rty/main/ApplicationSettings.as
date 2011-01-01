@@ -1,6 +1,9 @@
 package ch.six4rty.main
 {
+	import ch.six4rty.utils.FontObject;
+	
 	import com.greensock.events.LoaderEvent;
+	import com.greensock.loading.DataLoader;
 	import com.greensock.loading.LoaderMax;
 	import com.greensock.loading.XMLLoader;
 	
@@ -17,7 +20,9 @@ package ch.six4rty.main
 	
 	import nl.demonsters.debugger.MonsterDebugger;
 	
+	import org.sepy.fontreader.TFont;
 	import org.sepy.fontreader.TFontCollection;
+	import org.sepy.fontreader.table.ID;
 
 	public final class ApplicationSettings extends EventDispatcher
 	{
@@ -36,9 +41,8 @@ package ch.six4rty.main
 		private var _fontCollection				:ArrayCollection			= new ArrayCollection();
 		
 		private var _tFont						:TFontCollection;
-		private var _urlStream					:URLStream;
-		private var _urlRequest					:URLRequest;
-		private var _tempArray					:Array						= new Array();
+		private var _fontQueue					:LoaderMax;
+		private var _fontArray					:Array						= new Array();
 		
 		public function ApplicationSettings()
 		{
@@ -52,6 +56,7 @@ package ch.six4rty.main
 		
 		public function initApplication():void
 		{
+			_fontQueue	= new LoaderMax( { name:"fontqeue", onComplete:fontsLoaded } );
 			_queue		= new LoaderMax( { name:"queue", onProgress:progressHandler, onComplete:completeHandler, onError:errorHandler } );
 			
 			_queue.append( new XMLLoader( "_xml/unicodeTable.xml", {name:"unicodeTable" } ) );
@@ -101,7 +106,7 @@ package ch.six4rty.main
 			if ( _fileType == "singleFile" )
 			{
 				_fontCollection.addItem( event.target.url );
-				handleFont( event.target.url );
+				//handleFont( event.target.url );
 			}
 			else
 			{
@@ -111,13 +116,13 @@ package ch.six4rty.main
 			}
 		}
 		
-		protected function handleFont( url:String ):void
+		/*protected function handleFont( url:String ):void
 		{
 			_urlStream = new URLStream();
 			_urlStream.addEventListener(Event.COMPLETE, onFontLoaded);
 			_urlRequest = new URLRequest( url );
 			_urlStream.load( _urlRequest );
-		}
+		}*/
 		
 		public function get unicodeTable():ArrayCollection
 		{
@@ -141,26 +146,37 @@ package ch.six4rty.main
 		
 		protected function handleListing(event:FileListEvent):void
 		{			
-			_urlStream = new URLStream();
-			//_urlStream.addEventListener(Event.COMPLETE, onFontLoaded);
-			
 			for each ( var item:File in event.files )
 			{
-				_fontCollection.addItem( {url:item.url, fileObject:item} );
-				
-				/*_urlRequest = new URLRequest( item.url );
-				_urlStream.load( _urlRequest );*/
+				_fontCollection.addItem( {url:item.url, fileObject:item, name:"loading..."} );
+				_fontQueue.append( new DataLoader( item.url, { name:item.url, format:"binary", estimatedBytes:item.size } ) );
 			}
-			
-			_fontCollection.source.forEach( onFontLoaded, null );
+			_fontQueue.load();
 		}
 		
-		protected function onFontLoaded( item:*, index:int, array:Array):void
+		protected function fontsLoaded( event:LoaderEvent ):void
 		{
-			//MonsterDebugger.trace(this, item );
-			_tFont = TFontCollection.create( URLStream( item.url ), item.url );
-			_tempArray.push(_tFont);
-			MonsterDebugger.trace(this, _tempArray );
-		}
+			var i:int = 0;
+			for each ( var item:* in event.target.content )
+			{
+				var _tFont:TFontCollection = TFontCollection.create( LoaderMax.getContent( _fontCollection.getItemAt(i).url ), _fontCollection.getItemAt(i).url ) ;
+				var font:TFont = _tFont.getFont(_tFont.getFontCount() - 1);
+				var name:String = font.getNameTable().getRecordString(ID.nameFullFontName);
+				var style:String = font.getNameTable().getRecordString( ID.nameFontSubfamilyName );
+				
+				var fontVO:FontObject = new FontObject( name, _fontCollection.getItemAt(i).url, style );
+				_fontArray.push( fontVO );
+				
+				_fontCollection[i].name = name;
+				_fontCollection.refresh();
+				
+				MonsterDebugger.trace(this, _fontArray );
+				
+				i++;
+			}
+
+		}		
+
+		
 	}
 }

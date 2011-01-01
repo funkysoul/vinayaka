@@ -70,7 +70,7 @@
 			 rollOut="_vinayaka.hidetooltip()" rollOver="_vinayaka.displaytooltip( 'asdasdasdasdadsdadasd' )"/>
 	<mx:VRule includeIn="DefaultState" x="210" y="9" width="1" height="230"/>
 	<s:List id="FontList" includeIn="DefaultState" x="217" y="23" width="240" height="189"
-			dataProvider="{_vinayaka.appSettings.fontCollection}" labelField="url" enabled="true"
+			dataProvider="{_vinayaka.appSettings.fontCollection}" labelField="name" enabled="true"
 			itemRenderer="ch.six4rty.renderer.FontItemRenderer"></s:List>
 	<mx:VRule includeIn="State_Generation" x="469" y="10" width="2" height="228"/>
 	<s:Button includeIn="State_Generation" x="227" y="110" width="213" height="94"
@@ -90,5 +90,9 @@
 	<s:List id="UnicodeList" includeIn="State_Unicode" x="213" y="102" width="322" height="140"
 			itemRenderer="ch.six4rty.renderer.DeletableItemRenderer" dataProvider="{ _vinayaka.userSettings.unicodeListAC }"></s:List>
 	<mx:VRule includeIn="State_Unicode" x="554" y="10" width="4" height="228"/>
+	<s:Label includeIn="DefaultState" x="465" y="23" text="Font Name:"/>
+	<s:Label includeIn="DefaultState" x="465" y="43" text="Font Family:"/>
+	<s:Label includeIn="DefaultState" x="465" y="63" text="Font Style:"/>
+	<s:Label includeIn="DefaultState" x="465" y="83" text="Trademarks:"/>
 	
 </s:WindowedApplication>

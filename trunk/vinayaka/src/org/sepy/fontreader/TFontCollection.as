@@ -99,7 +99,7 @@ package org.sepy.fontreader
 		 * @return 
 		 * 
 		 */
-		public static function create(file:URLStream, pathName:String = "" ):TFontCollection
+		public static function create(file:ByteArray, pathName:String = "" ):TFontCollection
 		{
 	        var fc:TFontCollection = new TFontCollection();
     	    fc.read(file, pathName);
@@ -107,7 +107,7 @@ package org.sepy.fontreader
 	    }
 		
 		
-		protected function read(file:URLStream, pathName:String = ""):void
+		protected function read(file:ByteArray, pathName:String = ""):void
 		{
 			_pathName = pathName;
 			_bytes = new ByteArray();
@@ -130,7 +130,7 @@ package org.sepy.fontreader
 				_fonts[0] = new TFont(this);
 				_fonts[0].read(_bytes, 0, 0);
 			}
-			file.close();
+			//file.close();
 			
 			MonsterDebugger.trace(this, "finsihed read" );
 		}
