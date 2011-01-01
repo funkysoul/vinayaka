@@ -81,7 +81,7 @@ private function onFontLoaded( e:Event ):void
 	MonsterDebugger.trace(this, "READ FONT SEPY" );
 	changeProgressMessage( "Thanks SEPY", 50 );
 	
-	_tFont				= TFontCollection.create( URLStream( e.target ), _urlRequest.url.toString() );
+	//_tFont				= TFontCollection.create( URLStream( e.target ), _urlRequest.url.toString() );
 	
 	var font:TFont = _tFont.getFont(_tFont.getFontCount() - 1);
 	var name:String = font.getNameTable().getRecordString(ID.nameFullFontName);
