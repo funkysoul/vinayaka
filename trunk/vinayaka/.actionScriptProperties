@@ -13,9 +13,6 @@
     <sourceAttachmentPath/>
   </compiler>
   <applications>
-    <application path="Vinayka.mxml">
-      <airExcludes/>
-    </application>
     <application path="Vinayaka.mxml">
       <airExcludes/>
     </application>

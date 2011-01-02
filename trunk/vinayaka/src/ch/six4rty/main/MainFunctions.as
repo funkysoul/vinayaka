@@ -82,7 +82,7 @@ private function loadUnicodeTable():void
 	_xmlLoader.load( new URLRequest( UNICODE_TABLE ) );
 }
 
-private function readSystemFonts():void
+/*private function readSystemFonts():void
 {
 	_sharedObject = SharedObject.getLocal( "sharktail" );
 		
@@ -96,14 +96,14 @@ private function readSystemFonts():void
 		_file.getDirectoryListingAsync();
 		_file.addEventListener(FileListEvent.DIRECTORY_LISTING, handleListing);
 	}
-}
+}*/
 
 protected function navigationXMLLoaded( e:Event ):void
 {
 	e.target.removeEventListener( Event.COMPLETE, navigationXMLLoaded );
 	_navigationXMLList = XML( e.target.data ).menuitem;
 	
-	readSystemFonts();
+	//readSystemFonts();
 }
 
 protected function unicodeTableLoaded( e:Event ):void

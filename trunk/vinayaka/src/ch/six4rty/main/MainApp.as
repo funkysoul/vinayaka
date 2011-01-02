@@ -23,9 +23,6 @@ package ch.six4rty.main
 		[Bindable]
 		public var userSettings				:UserSettings				= UserSettings.getInstance();
 		
-		[Bindable] 
-		public var dragHandler				:DragHandler				= DragHandler.getInstance();
-		
 		public var prefHandler				:PreferencesHandler			= PreferencesHandler.getInstance();
 		public var stateHandler				:StateHandler				= StateHandler.getInstance();
 		
