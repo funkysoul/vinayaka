@@ -1,4 +1,4 @@
-package ch.six4rty.utils
+package ch.six4rty.vo
 {
 	public class FontObject
 	{
