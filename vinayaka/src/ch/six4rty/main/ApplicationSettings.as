@@ -1,6 +1,6 @@
 package ch.six4rty.main
 {
-	import ch.six4rty.utils.FontObject;
+	import ch.six4rty.vo.FontObject;
 	
 	import com.greensock.events.LoaderEvent;
 	import com.greensock.loading.DataLoader;

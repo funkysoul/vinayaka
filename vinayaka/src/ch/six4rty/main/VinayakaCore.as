@@ -15,21 +15,21 @@ package ch.six4rty.main
 
 	public final class VinayakaCore 
 	{
-		public const OUTPUT_AS3				:String				= "as3";
-		public const OUTPUT_SWC				:String				= "swc";
-		public const OUTPUT_SWF				:String				= "swf";
+		private static var instance			:VinayakaCore				= new VinayakaCore();
 		
-		private var _preferences			:PreferencesHandler	= PreferencesHandler.getInstance();
+		public const OUTPUT_AS3				:String						= "as3";
+		public const OUTPUT_SWC				:String						= "swc";
+		public const OUTPUT_SWF				:String						= "swf";
+		
+		private var _preferences			:PreferencesHandler			= PreferencesHandler.getInstance();
 		
 		private var _selectedOutput			:String;
 		private var _asCode					:String;
 		
-		private var _commandPrompt			:String 			= "C:\\WINDOWS\\system32\\cmd.exe";
+		private var _commandPrompt			:String 					= "C:\\WINDOWS\\system32\\cmd.exe";
 		private var _process				:NativeProcess;
 		private var _NPInfo					:NativeProcessStartupInfo;
-		
-		private static var instance				:VinayakaCore		= new VinayakaCore();
-				
+			
 		/**
 		 * 
 		 * 
@@ -146,6 +146,11 @@ package ch.six4rty.main
 		}
 		
 		private function createASFile():void
+		{
+			
+		}
+		
+		private function createSWCFile():void
 		{
 			
 		}
