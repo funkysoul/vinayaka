@@ -1,5 +1,7 @@
 package ch.six4rty.main
 {
+	import ch.six4rty.utils.StatusBarUpdater;
+	
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.events.NativeDragEvent;
@@ -27,15 +29,19 @@ package ch.six4rty.main
 		public var prefHandler				:PreferencesHandler			= PreferencesHandler.getInstance();
 		public var stateHandler				:StateHandler				= StateHandler.getInstance();
 		
-		
+		private var _statusBar				:StatusBarUpdater			= new StatusBarUpdater();
 		private var tt						:IToolTip;
 		
 		
-		public function MainApp(){}
+		public function MainApp()
+		{
+			
+		}
 		
 		public function displaytooltip( str:String ):void
 		{
 			tt = ToolTipManager.createToolTip( str, FlexGlobals.topLevelApplication.mouseX, FlexGlobals.topLevelApplication.mouseY );
+			
 		}
 		
 		public function hidetooltip():void

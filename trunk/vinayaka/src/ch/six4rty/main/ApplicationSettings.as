@@ -7,14 +7,11 @@ package ch.six4rty.main
 	import com.greensock.loading.LoaderMax;
 	import com.greensock.loading.XMLLoader;
 	
-	import flash.display.Loader;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.FileListEvent;
 	import flash.filesystem.File;
 	import flash.net.FileFilter;
-	import flash.net.URLRequest;
-	import flash.net.URLStream;
 	
 	import mx.collections.ArrayCollection;
 	
@@ -49,6 +46,11 @@ package ch.six4rty.main
 			if ( instance ) throw new Error( "Singleton can be only accessed through getInstance(); method" );
 		}
 		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public static function getInstance():ApplicationSettings
 		{
 			return instance;
@@ -85,6 +87,10 @@ package ch.six4rty.main
 			MonsterDebugger.trace(this, "Error Loading: " + evt.target + " - " + evt.text );
 		}
 		
+		/**
+		 * 
+		 * 
+		 */		
 		public function chooseSingleFile():void
 		{
 			_fileType = "singleFile";
@@ -92,6 +98,10 @@ package ch.six4rty.main
 			_file.browse( [_fileFilter] );
 		}
 		
+		/**
+		 * 
+		 * 
+		 */		
 		public function chooseFontFolder():void
 		{
 			_fileType = "folder";
@@ -106,7 +116,6 @@ package ch.six4rty.main
 			if ( _fileType == "singleFile" )
 			{
 				_fontCollection.addItem( event.target.url );
-				//handleFont( event.target.url );
 			}
 			else
 			{
@@ -116,14 +125,11 @@ package ch.six4rty.main
 			}
 		}
 		
-		/*protected function handleFont( url:String ):void
-		{
-			_urlStream = new URLStream();
-			_urlStream.addEventListener(Event.COMPLETE, onFontLoaded);
-			_urlRequest = new URLRequest( url );
-			_urlStream.load( _urlRequest );
-		}*/
-		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public function get unicodeTable():ArrayCollection
 		{
 			for each ( var item:XML in _unicodeTable.item )
@@ -134,11 +140,21 @@ package ch.six4rty.main
 			return _unicodeAC;
 		}
 
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public function get wordList():XML
 		{
 			return _wordList;
 		}
 
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public function get fontCollection():ArrayCollection
 		{
 			return _fontCollection;
@@ -157,9 +173,11 @@ package ch.six4rty.main
 		protected function fontsLoaded( event:LoaderEvent ):void
 		{
 			var i:int = 0;
+			
 			for each ( var item:* in event.target.content )
 			{
 				var _tFont:TFontCollection = TFontCollection.create( LoaderMax.getContent( _fontCollection.getItemAt(i).url ), _fontCollection.getItemAt(i).url ) ;
+				
 				var font:TFont = _tFont.getFont(_tFont.getFontCount() - 1);
 				var name:String = font.getNameTable().getRecordString(ID.nameFullFontName);
 				var style:String = font.getNameTable().getRecordString( ID.nameFontSubfamilyName );
@@ -169,8 +187,6 @@ package ch.six4rty.main
 				
 				_fontCollection[i].name = name;
 				_fontCollection.refresh();
-				
-				MonsterDebugger.trace(this, _fontArray );
 				
 				i++;
 			}
