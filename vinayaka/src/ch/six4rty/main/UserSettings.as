@@ -13,11 +13,20 @@ package ch.six4rty.main
 		
 		private var _unicodeListAC				:ArrayCollection	= new ArrayCollection(); 
 		
+		/**
+		 * 
+		 * 
+		 */		
 		public function UserSettings()
 		{
 			if ( instance ) throw new Error( "Singleton can be only accessed through getInstance(); method" );
 		}
 		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public static function getInstance():UserSettings
 		{
 			return instance;
@@ -25,11 +34,20 @@ package ch.six4rty.main
 		
 		
 		//UNICODE HANDLING
+		/**
+		 * 
+		 * 
+		 */		
 		public function unicodeHandler():void
 		{
 			_unicodeListAC.addItem( FlexGlobals.topLevelApplication.charset.selectedItem );
 		}
 
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public function get unicodeListAC():ArrayCollection
 		{
 			return _unicodeListAC;

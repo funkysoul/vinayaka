@@ -2,8 +2,8 @@
 <s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
 					   xmlns:s="library://ns.adobe.com/flex/spark"
 					   xmlns:mx="library://ns.adobe.com/flex/mx"
-					   width="979" height="248" currentState="DefaultState"
-					   height.DefaultState="248"  creationComplete="init()">
+					   width="979" height="276" currentState="DefaultState"
+					   height.DefaultState="276"  creationComplete="init()">
 	
 	<s:states>
 		<s:State name="DefaultState"/>
@@ -17,12 +17,12 @@
 			import ch.six4rty.main.MainApp;
 			import mx.collections.ArrayCollection;
 			
-			[Bindable] private var _vinayaka:MainApp
+			[Bindable] 
+			private var _vinayaka	:MainApp
 			
 			private function init():void
 			{
 				_vinayaka			= new MainApp();
-				
 				_vinayaka.appSettings.initApplication();
 			}
 		]]>
@@ -37,7 +37,7 @@
 			  enabled.DefaultState="false"/>
 	<s:Button id="btnSelectUnicode" x="0" y="49" width="204" height="50" label="Select Unicode"
 			  click="_vinayaka.stateHandler.stateChange( event )"
-			  label.State_Unicode="Select Unicode &amp; Extra Chars" enabled.State_Unicode="false"/>
+			 enabled.State_Unicode="false"/>
 	<s:Button id="btnSelectGenerate" x="0" y="149" width="204" height="50" label="Generate"
 			  click="_vinayaka.stateHandler.stateChange( event )"
 			  x.DefaultState="0" y.DefaultState="99"
@@ -74,12 +74,12 @@
 			itemRenderer="ch.six4rty.renderer.FontItemRenderer"></s:List>
 	<mx:VRule includeIn="State_Generation" x="469" y="10" width="2" height="228"/>
 	<s:Button includeIn="State_Generation" x="227" y="110" width="213" height="94"
-			  label="Generate AS3" fontSize="21" click="_vinayaka.coreClasses.GenerateFontFile('as3')"/>
+			  label="Generate AS3" fontSize="21" click="_vinayaka.coreClasses.GenerateFontFile(_vinayaka.coreClasses.OUTPUT_AS3)"/>
 	<mx:VRule includeIn="State_Generation" x="729" y="10" width="2" height="228"/>
 	<s:Button includeIn="State_Generation" x="497" y="110" width="213" height="94"
-			  label="Generate SWC" fontSize="21" click="_vinayaka.coreClasses.GenerateFontFile('swc')"/>
+			  label="Generate SWC" fontSize="21" click="_vinayaka.coreClasses.GenerateFontFile(_vinayaka.coreClasses.OUTPUT_SWC)"/>
 	<s:Button includeIn="State_Generation" x="747" y="110" width="213" height="94"
-			  label="Generate SWF" fontSize="21" click="_vinayaka.coreClasses.GenerateFontFile('swf')"/>
+			  label="Generate SWF" fontSize="21" click="_vinayaka.coreClasses.GenerateFontFile(_vinayaka.coreClasses.OUTPUT_SWF)"/>
 	<s:Image includeIn="State_Generation" x="297" y="33" source="images/appIcons/exp_icon_as.png"/>
 	<s:Image includeIn="State_Generation" x="558" y="33" source="images/appIcons/exp_icon_swc.png"/>
 	<s:Image includeIn="State_Generation" x="828" y="33" source="images/appIcons/exp_icon_swf.png"/>
@@ -87,12 +87,14 @@
 	<s:Button includeIn="DefaultState" x="340" y="216" width="117" label="Add Font Folder" click="{ _vinayaka.appSettings.chooseFontFolder() }"/>
 	<s:ComboBox includeIn="State_Unicode" id="charset" x="214" y="71" width="322"
 				dataProvider="{ _vinayaka.appSettings.unicodeTable }" change="{ _vinayaka.userSettings.unicodeHandler() }"/>
-	<s:List id="UnicodeList" includeIn="State_Unicode" x="213" y="102" width="322" height="140"
+	<s:List id="UnicodeList" includeIn="State_Unicode" x="213" y="102" width="322" height="136"
 			itemRenderer="ch.six4rty.renderer.DeletableItemRenderer" dataProvider="{ _vinayaka.userSettings.unicodeListAC }"></s:List>
 	<mx:VRule includeIn="State_Unicode" x="554" y="10" width="4" height="228"/>
-	<s:Label includeIn="DefaultState" x="465" y="23" text="Font Name:"/>
-	<s:Label includeIn="DefaultState" x="465" y="43" text="Font Family:"/>
-	<s:Label includeIn="DefaultState" x="465" y="63" text="Font Style:"/>
-	<s:Label includeIn="DefaultState" x="465" y="83" text="Trademarks:"/>
+	<s:Label includeIn="DefaultState" x="465" y="43" text="Font Name:"/>
+	<s:Label includeIn="DefaultState" x="465" y="63" text="Font Family:"/>
+	<s:Label includeIn="DefaultState" x="465" y="83" text="Font Style:"/>
+	<s:Label includeIn="DefaultState" x="465" y="103" text="Trademarks:"/>
+	<s:Image x="4" y="210" source="icons/vinayaka_32x32.png"/>
+	<s:Label x="40" y="219" fontSize="15" text="Vinayaka (v1)"/>
 	
 </s:WindowedApplication>

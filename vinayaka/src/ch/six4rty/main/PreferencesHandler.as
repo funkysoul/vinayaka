@@ -20,6 +20,8 @@ package ch.six4rty.main
 		private var _sharedObject			:SharedObject;
 		private var _fileReferenceHandler	:File;
 		
+		private var _sdkLocation			:String;
+		
 		public function PreferencesHandler()
 		{
 			if ( instance ) throw new Error( "Singleton can be only accessed through getInstance(); method" );
@@ -28,7 +30,11 @@ package ch.six4rty.main
 			_sharedObject 					= SharedObject.getLocal( "vinayaka" );
 		}
 		
-		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
 		public static function getInstance():PreferencesHandler
 		{
 			return instance;
@@ -40,6 +46,11 @@ package ch.six4rty.main
 			FlexGlobals.topLevelApplication.sysFontLoc.text = _sharedObject.data.fontLoc;
 		}
 		
+		/**
+		 * 
+		 * @param evt
+		 * 
+		 */		
 		public function prefSDKLocation( evt:MouseEvent = null ):void
 		{
 			_type							= "sdk";
@@ -47,6 +58,11 @@ package ch.six4rty.main
 			_fileReferenceHandler.browseForDirectory( "Please select your Flex SDK's Location" );
 		}
 		
+		/**
+		 * 
+		 * @param evt
+		 * 
+		 */		
 		public function prefSysFontLocation( evt:MouseEvent = null ):void
 		{
 			_type							= "font";
@@ -60,6 +76,8 @@ package ch.six4rty.main
 			{
 				FlexGlobals.topLevelApplication.sdkLoc.text = evt.target.nativePath;
 				_sharedObject.data.sdkLoc = evt.target.nativePath;
+				
+				_sdkLocation = evt.target.nativePath;
 			}
 			else
 			{
@@ -68,8 +86,18 @@ package ch.six4rty.main
 			}
 			
 			_sharedObject.flush();
-			
 		}
+
+		public function get sdkLocation():String
+		{
+			return _sdkLocation;
+		}
+
+		public function set sdkLocation(value:String):void
+		{
+			_sdkLocation = value;
+		}
+
 		
 	}
 }
