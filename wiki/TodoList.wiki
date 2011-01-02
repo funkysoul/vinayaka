@@ -1,0 +1,14 @@
+#summary Developers To Do List and ideas
+
+= Introduction =
+
+This is the developers todo list for this project.
+
+
+= Details =
+*v1.1 features*
+- Auto Update Framework
+- Mac OSX Version
+
+*v1.2 features*
+- Load / Save of Templates
