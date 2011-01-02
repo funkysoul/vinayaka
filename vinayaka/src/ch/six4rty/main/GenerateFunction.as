@@ -139,8 +139,8 @@ protected final function launchCompiler():void
 	MonsterDebugger.trace(this, "Launch Compiler" );
 	changeProgressMessage( "Witch is getting all her Power", 90 );
 
-	_sharedObject = SharedObject.getLocal( "sharktail" );
-	var compFile:File = new File( _sharedObject.data.sdkLoc );
+	/*_sharedObject = SharedObject.getLocal( "sharktail" );
+	var compFile:File = new File( _sharedObject.data.sdkLoc );*/
 	
 	
 	_process 	= new NativeProcess();
