@@ -118,7 +118,7 @@ package ch.six4rty.main
 			
 			for each ( var itemFont:Object in _appSettings.fontCollection.source )
 			{
-				_asCode += 'Font.registerFont(' +  StringUtils.StripSpaces(item.name) + ');\n';
+				_asCode += 'Font.registerFont(' +  StringUtils.StripSpaces(itemFont.name) + ');\n';
 			}
 			
 			_asCode += '\n}\n}\n};';
@@ -163,7 +163,7 @@ package ch.six4rty.main
 			
 			if ( _selectedOutput == "swf" )
 			{
-				var compileCommand:String = 'mxmlc ' + File.desktopDirectory.resolvePath( "Vinayaka.as" ).nativePath + " -output " + File.desktopDirectory.nativePath + "\\vinayaka.swf";
+				var compileCommand:String = 'mxmlc ' + File.desktopDirectory.resolvePath( "Vinayaka.as" ).nativePath + " -output " + File.desktopDirectory.nativePath + "\\vinayaka.swf -static-link-runtime-shared-libraries=true";
 			}
 			else
 			{
