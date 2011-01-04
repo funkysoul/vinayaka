@@ -96,7 +96,7 @@ package ch.six4rty.main
 		}
 		
 		/**
-		 * 
+		 * Handler responsible for browsing a single font file.
 		 * 
 		 */		
 		public function chooseSingleFile():void
@@ -107,7 +107,7 @@ package ch.six4rty.main
 		}
 		
 		/**
-		 * 
+		 * Handler responsible for browsing a folder and collect all files in it.
 		 * 
 		 */		
 		public function chooseFontFolder():void
@@ -137,7 +137,9 @@ package ch.six4rty.main
 		
 		/**
 		 * 
-		 * @return 
+		 * Returns the Unicode Array to be used for display aswell for the compilation.
+		 * 
+		 * @return
 		 * 
 		 */		
 
@@ -155,6 +157,8 @@ package ch.six4rty.main
 		}
 
 		/**
+		 * 
+		 * Returns the wordlist (currently not in use)
 		 * 
 		 * @return 
 		 * 
