@@ -31,6 +31,7 @@ package ch.six4rty.main
 		
 		private var _selectedOutput			:String;
 		private var _selectedChars			:String						= "";
+		private var _selectedSDKVer			:Boolean					= true;
 		private var _asCode					:String;
 		
 		private var _commandPrompt			:String 					= "C:\\WINDOWS\\system32\\cmd.exe";
@@ -57,9 +58,17 @@ package ch.six4rty.main
 		 */		
 		public function GenerateFontFile( str:String ):void
 		{
-			
-			
 			_selectedOutput = str;
+			
+			if ( FlexGlobals.topLevelApplication.flex3RB.selected || FlexGlobals.topLevelApplication.flex3RBSWF.selected )
+			{
+				_selectedSDKVer = false;
+			}
+			else
+			{
+				_selectedSDKVer = true;
+			}
+			
 			var tempArray:Array = _appSettings.unicodeTable.filter( selectedOnly );
 			for each ( var item:UnicodeObject in tempArray )
 			{
@@ -71,8 +80,13 @@ package ch.six4rty.main
 				StringUtils.RemoveLastSeparator( _selectedChars );
 				_selectedChars += FlexGlobals.topLevelApplication.ConvertedText.text;
 			}
-			FlexGlobals.topLevelApplication.showProgressPanel();
-			FlexGlobals.topLevelApplication._progressPopUp.updatePanel(20);
+			
+			if ( _selectedOutput != "as3" )
+			{
+				FlexGlobals.topLevelApplication.showProgressPanel();
+				FlexGlobals.topLevelApplication._progressPopUp.updatePanel(20);
+			}
+			
 			
 			createASTemplate();
 		}		
@@ -84,22 +98,27 @@ package ch.six4rty.main
 		
 		private function createASTemplate():void
 		{
-			FlexGlobals.topLevelApplication._progressPopUp.updatePanel(40);
-			
+			if ( _selectedOutput != "as3" )
+			{
+				FlexGlobals.topLevelApplication._progressPopUp.updatePanel(40);
+			}
+		
 			_asCode			= "package\n{\nimport flash.display.Sprite;\nimport flash.text.Font;\n\npublic class Vinayaka extends Sprite\n{\n";
 			
-			for each ( var item:FontObject in _appSettings.fontArray )
+			MonsterDebugger.trace(this, _appSettings.fontCollection );
+			
+			for each ( var item:Object in _appSettings.fontCollection.source )
 			{
 				MonsterDebugger.trace(this, item, 0xff0000 );
-				_asCode += '[Embed(source="' + StringUtils.ReplaceBackslash( item.fontNativePath ) + '", fontFamily="' + item.fontName + '", embedAsCFF="true", mimeType="application/x-font-truetype", unicodeRange="' +  _selectedChars  + '")]\n';
-				_asCode += "private var " + StringUtils.StripSpaces(item.fontName) + ":Class;\n";
+				_asCode += '[Embed(source="' + StringUtils.ReplaceBackslash( item.fileObject.nativePath ) + '", fontFamily="' + item.name + '", embedAsCFF="'+ _selectedSDKVer +'", mimeType="application/x-font-truetype", unicodeRange="' +  _selectedChars  + '")]\n';
+				_asCode += "private var " + StringUtils.StripSpaces(item.name) + ":Class;\n";
 			}
 			
 			_asCode += 'public function Vinayaka()\n{\n';
 			
-			for each ( var itemFont:FontObject in _appSettings.fontArray )
+			for each ( var itemFont:Object in _appSettings.fontCollection.source )
 			{
-				_asCode += 'Font.registerFont(' +  StringUtils.StripSpaces(itemFont.fontName) + ');\n';
+				_asCode += 'Font.registerFont(' +  StringUtils.StripSpaces(item.name) + ');\n';
 			}
 			
 			_asCode += '\n}\n}\n};';
