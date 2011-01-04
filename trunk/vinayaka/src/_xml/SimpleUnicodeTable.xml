@@ -2,7 +2,7 @@
 <table>
 	<item>
 		<label>U+0000 - U+007F: Basic Latin</label>
-		<data>U+000-U+007F</data>
+		<data>U+0000-U+007F</data>
 	</item>
 	<item>
 		<label>U+0080 - U+00FF: Latin 1 Supplement</label>

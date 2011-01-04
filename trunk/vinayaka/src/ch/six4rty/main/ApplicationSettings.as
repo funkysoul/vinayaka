@@ -86,11 +86,8 @@ package ch.six4rty.main
 			
 			_unicodeArray	 = new Array();
 			
-			
-			
 			dispatchEvent( new Event ( Event.COMPLETE, false, true ) );
-			
-			//FlexGlobals.topLevelApplication.unicodeAC.dispatchEvent( new CollectionEvent( CollectionEvent.COLLECTION_CHANGE ) );
+
 		}
 		
 		protected function errorHandler( evt:LoaderEvent ):void
@@ -125,7 +122,7 @@ package ch.six4rty.main
 			_file.removeEventListener( Event.SELECT, onFontSelect );
 			
 			if ( _fileType == "singleFile" )
-			{
+			{				
 				_fontCollection.addItem( {url:event.target.url, fileObject:event.target, name:"loading..."} );
 				_fontQueue.append( new DataLoader( event.target.url, { name:event.target.url, format:"binary", estimatedBytes:File(event.target).size } ) );
 				_fontQueue.load( true );
@@ -189,27 +186,35 @@ package ch.six4rty.main
 		
 		protected function fontsLoaded( event:LoaderEvent ):void
 		{
+			_fontArray = [];
 			
-			var i:int = 0;
-			
-			for each ( var item:* in event.target.content )
+			for ( var i:int = 0; i < _fontQueue.content.length; i++ )
 			{
 				var _tFont:TFontCollection = TFontCollection.create( LoaderMax.getContent( _fontCollection.getItemAt(i).url ), _fontCollection.getItemAt(i).url ) ;
 				
-				var font:TFont = _tFont.getFont(_tFont.getFontCount() - 1);
-				var name:String = font.getNameTable().getRecordString(ID.nameFullFontName);
-				var style:String = font.getNameTable().getRecordString( ID.nameFontSubfamilyName );
+				var font:TFont 				= _tFont.getFont(_tFont.getFontCount() - 1);
+				var name:String 			= font.getNameTable().getRecordString( ID.nameFullFontName );
+				var style:String 			= font.getNameTable().getRecordString( ID.nameFontSubfamilyName );
+				var copyright:String 		= font.getNameTable().getRecordString( ID.nameCopyrightNotice );
+				var version:String			= font.getNameTable().getRecordString( ID.nameVersionString );
 				
-				MonsterDebugger.trace(this, _fontCollection.getItemAt(i), 0x00ff00 );
-				
-				var fontVO:FontObject = new FontObject( name, _fontCollection.getItemAt(i).url, _fontCollection.getItemAt(i).fileObject.nativePath, style );
+				var fontVO:FontObject = new FontObject( name, _fontCollection.getItemAt(i).url, _fontCollection.getItemAt(i).fileObject.nativePath, style, copyright, version );
 				_fontArray.push( fontVO );
 				
 				_fontCollection[i].name = name;
 				_fontCollection.refresh();
-				
-				i++;
 			}
+		}
+		
+		public function getFontInformation( e:IndexChangeEvent ):void
+		{
+			var infoString:String = "Font Name: " + _fontArray[e.newIndex].fontName + "\n" + 
+									"Font Style: " + _fontArray[e.newIndex].fontStyle + "\n" + 
+									"Font URL: " + _fontArray[e.newIndex].fontURL + "\n" + 
+									"Font Version: " + _fontArray[e.newIndex].fontVersion + "\n\n" + 
+									"Font Copyright: " + _fontArray[e.newIndex].fontCopyright;
+			
+			FlexGlobals.topLevelApplication.FontInfo.text = infoString;
 		}
 		
 		public function get fontArray():Array
