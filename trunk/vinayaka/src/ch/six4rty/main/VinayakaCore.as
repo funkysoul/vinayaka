@@ -164,7 +164,9 @@ package ch.six4rty.main
 			if ( _selectedOutput == "swf" )
 			{
 				var compileCommand:String = 'mxmlc ' + File.desktopDirectory.resolvePath( "Vinayaka.as" ).nativePath + " -output " + File.desktopDirectory.nativePath + "\\vinayaka.swf -static-link-runtime-shared-libraries=true";
+				//var compileCommand:String = 'mxmlc ' + 'C:\\Vinayaka.as';
 			}
+			
 			else
 			{
 				MonsterDebugger.trace(this, "create SWC" );
@@ -182,7 +184,7 @@ package ch.six4rty.main
 			
 			// This is just some simple checking to find if the compilation is done. 
 			MonsterDebugger.trace(this, op );
-			if(op.match("Byte")||op.match("Bytes"))
+			if(op.match(".swf"))
 			{
 				FlexGlobals.topLevelApplication._progressPopUp.updatePanel(100);
 				
