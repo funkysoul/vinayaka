@@ -43,6 +43,7 @@
 				this.removeEventListener(FlexEvent.APPLICATION_COMPLETE, init );
 			}
 			
+			
 			public function showProgressPanel():void
 			{
 				_progressPopUp = ProgressPanel(PopUpManager.createPopUp( this, ProgressPanel, true ) );
