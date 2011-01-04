@@ -4,6 +4,7 @@ package ch.six4rty.vo
 	{
 		private var _fontName				:String;
 		private var _fontURL				:String;
+		private var _fontNativePath			:String;
 		private var _fontStyle				:String;
 		
 		
@@ -14,10 +15,11 @@ package ch.six4rty.vo
 		 * @param style
 		 * 
 		 */		
-		public function FontObject( name:String, url:String, style:String ):void
+		public function FontObject( name:String, url:String, nativePath:String, style:String ):void
 		{
 			_fontName						= name;
 			_fontURL						= url;
+			_fontNativePath					= nativePath
 			_fontStyle						= style;
 		}	
 		
@@ -79,6 +81,26 @@ package ch.six4rty.vo
 		public function set fontStyle(value:String):void
 		{
 			_fontStyle = value;
+		}
+		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public function get fontNativePath():String
+		{
+			return _fontNativePath;
+		}
+		
+		/**
+		 * 
+		 * @param value
+		 * 
+		 */		
+		public function set fontNativePath(value:String):void
+		{
+			_fontNativePath = value;
 		}
 
 

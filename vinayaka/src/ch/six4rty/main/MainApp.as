@@ -45,5 +45,7 @@ package ch.six4rty.main
 		{
 			ToolTipManager.destroyToolTip( tt );
 		}
+		
+		
 	}
 }

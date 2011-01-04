@@ -16,11 +16,28 @@ package ch.six4rty.utils
 			return ( orig.join("") );
 		}
 		
+		/**
+		 * 
+		 * @param originalString
+		 * @return 
+		 * 
+		 */		
 		public static function ReplaceBackslash( originalString:String ):String
 		{
 			var pattern:RegExp= /(\\)/g;
 			var newStr:String = originalString.replace( pattern, "/" );
 			return newStr;
+		}
+		
+		/**
+		 * 
+		 * @param originalString
+		 * @return 
+		 * 
+		 */		
+		public static function RemoveLastSeparator( originalString:String ):String
+		{
+			return originalString.slice( 0, -2 );
 		}
 	}
 }
