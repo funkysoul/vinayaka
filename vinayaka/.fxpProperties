@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fxpProperties abbreviated="false" authoringTool="Flex Builder" compiles="true" parentProject="01a81d44-f287-41a1-91a6-05a1dc1221a7" projectUUID="01a81d44-f287-41a1-91a6-05a1dc1221a7" sdkVersion="4.5.0" uuid="33d059d9-b1ee-4c7a-b4f0-824388c0eefc" version="12">
+  <projects/>
+  <src/>
+  <swc>
+    <linked location="sdkPlaceHolder" path="sdkPlaceHolder" position="0" uuid="33d059d9-b1ee-4c7a-b4f0-824388c0eefc"/>
+    <linked location="E:/myWork/Vinayaka/Vinayka/libs" path="/libs" position="1" uuid="33d059d9-b1ee-4c7a-b4f0-824388c0eefc"/>
+  </swc>
+  <misc/>
+  <theme/>
+  <mxmlFormattingPrefs groupAttributesByState="true" maxLineWidth="100" mxmlAlignAttributes="true" mxmlAttributeOrder="id,userLabel,includeIn,excludeFrom,visible,x,y,z,left,right,top,bottom,width,height,minWidth,minHeight,maxWidth,maxHeight,label" mxmlKeepAttributeValuesOrganized="true"/>
+</fxpProperties>
