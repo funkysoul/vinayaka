@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<update xmlns="http://ns.riaspace.com/air/framework/update/description/1.1">
+        <!-- Win update -->
+        <exe>
+                <version>1.0.0</version>
+                <url>http://blog.six4rty.ch/_projects/vinayaka/vinayaka.exe</url>
+            <description>
+            <![CDATA[
+                * This a Win update
+                ]]>
+        </description>
+        </exe>
+</update>

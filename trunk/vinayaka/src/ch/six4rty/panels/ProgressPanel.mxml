@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   width="332" height="132" title="Generation in Progess">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import mx.core.FlexGlobals;
+			import mx.events.CloseEvent;
+			import mx.events.FlexMouseEvent;
+			import mx.managers.PopUpManager;
+			
+			public function onOutSideClick( e:FlexMouseEvent = null ):void
+			{
+				if ( generationProgress.value == 100 )
+				{
+					PopUpManager.removePopUp( FlexGlobals.topLevelApplication._progressPopUp );
+				}
+			}
+			
+			public function onClose( e:CloseEvent ):void
+			{
+				if ( generationProgress.value == 100 )
+				{
+					PopUpManager.removePopUp( FlexGlobals.topLevelApplication._progressPopUp );
+				}
+			}
+						
+			public function updatePanel( val:int ):void
+			{
+				generationProgress.setProgress( val, 100 );
+				if ( val == 100 )
+				{
+					closeBtn.enabled = true;
+					
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	<mx:ProgressBar id="generationProgress" x="65" y="10" labelPlacement="bottom" minimum="0" maximum="100" label="GENERATION IN PROGRESS" mode="manual"/>
+	<s:Button id="closeBtn" x="130" y="68" label="Thank you" enabled="false" click="onOutSideClick()"/>
+</s:TitleWindow>

@@ -2,6 +2,7 @@ package ch.six4rty.main
 {
 	import flash.events.MouseEvent;
 	
+	import mx.controls.Alert;
 	import mx.core.FlexGlobals;
 	
 	import nl.demonsters.debugger.MonsterDebugger;
@@ -45,11 +46,15 @@ package ch.six4rty.main
 				case "btnSelectUnicode":
 					FlexGlobals.topLevelApplication.currentState = "State_Unicode";
 					break;
-				case "btnSelectExtraChars":
-					FlexGlobals.topLevelApplication.currentState = "State_ExtraChars";
-					break;
 				case "btnSelectGenerate":
-					FlexGlobals.topLevelApplication.currentState = "State_Generation";
+					if ( FlexGlobals.topLevelApplication._vinayaka.appSettings.fontCollection.length > 0 )
+					{
+						FlexGlobals.topLevelApplication.currentState = "State_Generation";
+					}
+					else
+					{
+						Alert.show( "No fonts selected.", "Error", Alert.OK );
+					}
 					break;
 				case "btnSelectPrefs":
 					FlexGlobals.topLevelApplication.currentState = "State_Preferences";
