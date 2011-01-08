@@ -47,7 +47,7 @@
 			public function showProgressPanel():void
 			{
 				_progressPopUp = ProgressPanel(PopUpManager.createPopUp( this, ProgressPanel, true ) );
-				_progressPopUp.title = "Modal Example";
+				_progressPopUp.title = "Generating Files";
 				PopUpManager.centerPopUp( _progressPopUp );
 				_progressPopUp.addEventListener( FlexMouseEvent.MOUSE_DOWN_OUTSIDE, _progressPopUp.onOutSideClick );
 				_progressPopUp.addEventListener( CloseEvent.CLOSE, _progressPopUp.onClose );
@@ -114,16 +114,16 @@
 	<mx:VRule includeIn="State_Generation" x="469" y="10" width="2" height="228"/>
 	<s:Button id="GenerateBtnAS3" includeIn="State_Generation" x="227" y="90" width="213" height="94"
 			  label="Generate AS3"
-			  click="_vinayaka.coreClasses.GenerateFontFile(_vinayaka.coreClasses.OUTPUT_AS3)"
+			  click="_vinayaka.coreClasses.generateFontFile(_vinayaka.coreClasses.OUTPUT_AS3)"
 			  enabled="true" fontSize="21"/>
 	<mx:VRule includeIn="State_Generation" x="729" y="10" width="2" height="228"/>
 	<s:Button id="GenerateBtnSWC" includeIn="State_Generation" x="497" y="90" width="213" height="94"
 			  label="Generate SWC"
-			  click="_vinayaka.coreClasses.GenerateFontFile(_vinayaka.coreClasses.OUTPUT_SWC)"
+			  click="_vinayaka.coreClasses.generateFontFile(_vinayaka.coreClasses.OUTPUT_SWC)"
 			  enabled="false" fontSize="21"/>
 	<s:Button id="GenerateBtnSWF" includeIn="State_Generation" x="747" y="90" width="213" height="94"
 			  label="Generate SWF"
-			  click="_vinayaka.coreClasses.GenerateFontFile(_vinayaka.coreClasses.OUTPUT_SWF)"
+			  click="_vinayaka.coreClasses.generateFontFile(_vinayaka.coreClasses.OUTPUT_SWF)"
 			  enabled="true" fontSize="21"/>
 	<s:Image includeIn="State_Generation" x="297" y="13" source="@Embed('images/appIcons/exp_icon_as.png')"/>
 	<s:Image includeIn="State_Generation" x="558" y="13" source="@Embed('images/appIcons/exp_icon_swc.png')"/>

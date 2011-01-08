@@ -108,6 +108,7 @@ package ch.six4rty.main
 			return _unicodeListAC;
 		}		
 
+		
 		public function get glyphCount():int
 		{
 			_glyphCount = String(FlexGlobals.topLevelApplication.ConvertedText.text).split(",").length - 1;

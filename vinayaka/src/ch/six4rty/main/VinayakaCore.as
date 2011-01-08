@@ -36,7 +36,7 @@ package ch.six4rty.main
 		
 		private var _commandPrompt			:String 					= "C:\\WINDOWS\\system32\\cmd.exe";
 		private var _process				:NativeProcess;
-		private var _NPInfo					:NativeProcessStartupInfo;
+		private var _nativeProcessStartupInfo					:NativeProcessStartupInfo;
 			
 		
 		public function VinayakaCore():void
@@ -56,7 +56,7 @@ package ch.six4rty.main
 		 * @param str
 		 * 
 		 */		
-		public function GenerateFontFile( str:String ):void
+		public function generateFontFile( str:String ):void
 		{
 			_selectedOutput = str;
 			
@@ -103,25 +103,25 @@ package ch.six4rty.main
 				FlexGlobals.topLevelApplication._progressPopUp.updatePanel(40);
 			}
 		
-			_asCode			= "package\n{\nimport flash.display.Sprite;\nimport flash.text.Font;\n\npublic class Vinayaka extends Sprite\n{\n";
+			_asCode			= "package\n{\n\timport flash.display.Sprite;\n\timport flash.text.Font;\n\n\tpublic class Vinayaka extends Sprite\n\t{\n";
 			
-			MonsterDebugger.trace(this, _appSettings.fontCollection );
+			MonsterDebugger.trace(this, _appSettings.fontArray );
 			
-			for each ( var item:Object in _appSettings.fontCollection.source )
+			for each ( var item:Object in _appSettings.fontArray )
 			{
 				MonsterDebugger.trace(this, item, 0xff0000 );
-				_asCode += '[Embed(source="' + StringUtils.ReplaceBackslash( item.fileObject.nativePath ) + '", fontFamily="' + item.name + '", embedAsCFF="'+ _selectedSDKVer +'", mimeType="application/x-font-truetype", unicodeRange="' +  _selectedChars  + '")]\n';
-				_asCode += "private var " + StringUtils.StripSpaces(item.name) + ":Class;\n";
+				_asCode += '\t\t[Embed(source="' + StringUtils.ReplaceBackslash( item.fontNativePath ) + '", fontFamily="' + item.fontName + '", embedAsCFF="'+ _selectedSDKVer +'", mimeType="application/x-font-truetype", unicodeRange="' +  _selectedChars  + '")]\n';
+				_asCode += "\t\tprivate var " + StringUtils.StripSpaces(item.fontName) + ":Class;\n";
 			}
 			
-			_asCode += 'public function Vinayaka()\n{\n';
+			_asCode += '\n\t\tpublic function Vinayaka()\n\t\t{\n';
 			
-			for each ( var itemFont:Object in _appSettings.fontCollection.source )
+			for each ( var itemFont:Object in _appSettings.fontArray )
 			{
-				_asCode += 'Font.registerFont(' +  StringUtils.StripSpaces(itemFont.name) + ');\n';
+				_asCode += '\t\t\tFont.registerFont(' +  StringUtils.StripSpaces(itemFont.fontName) + ');\n';
 			}
 			
-			_asCode += '\n}\n}\n};';
+			_asCode += '\n\t\t}\n\t}\n};';
 			
 			MonsterDebugger.trace(this, _asCode );
 			
@@ -148,6 +148,12 @@ package ch.six4rty.main
 			fileStream.close();
 		}
 		
+		private function deleteTempFile():void
+		{
+			var file:File = File.desktopDirectory.resolvePath( "Vinayaka.as" );
+			file.deleteFile();
+		}
+		
 		protected final function launchCompiler( e:Event ):void
 		{
 			FlexGlobals.topLevelApplication._progressPopUp.updatePanel(80);
@@ -157,19 +163,20 @@ package ch.six4rty.main
 			var compFile:File = new File( _preferences.sdkLocation );
 			
 			_process 	= new NativeProcess();
-			_NPInfo 	= new NativeProcessStartupInfo();
-			_NPInfo.executable = new File( _commandPrompt );
-			_process.start(_NPInfo);
+			_nativeProcessStartupInfo 	= new NativeProcessStartupInfo();
+			_nativeProcessStartupInfo.executable = new File( _commandPrompt );
+			_process.start(_nativeProcessStartupInfo);
 			
 			if ( _selectedOutput == "swf" )
 			{
-				var compileCommand:String = 'mxmlc ' + File.desktopDirectory.resolvePath( "Vinayaka.as" ).nativePath + " -output " + File.desktopDirectory.nativePath + "\\vinayaka.swf -static-link-runtime-shared-libraries=true";
-				//var compileCommand:String = 'mxmlc ' + 'C:\\Vinayaka.as';
+				MonsterDebugger.trace(this, _preferences.sdkLocation );
+				var compileCommand:String = '"' + _preferences.sdkLocation + "\\bin\\mxmlc" + '" '+ File.desktopDirectory.resolvePath( 'Vinayaka.as' ).nativePath + ' -output ' + File.desktopDirectory.nativePath + '\\Vinayaka.swf -static-link-runtime-shared-libraries=true';
+				
 			}
 			
 			else
 			{
-				MonsterDebugger.trace(this, "create SWC" );
+				// to be done SWC creation
 			}
 			
 			
@@ -182,14 +189,12 @@ package ch.six4rty.main
 		{
 			var op:String = _process.standardOutput.readUTFBytes(_process.standardOutput.bytesAvailable);
 			
-			// This is just some simple checking to find if the compilation is done. 
 			MonsterDebugger.trace(this, op );
-			if(op.match(".swf"))
+			if( op.match( "bytes" ) || op.match( "Bytes" ) || op.match( "Byte" ) )
 			{
-				FlexGlobals.topLevelApplication._progressPopUp.updatePanel(100);
-				
-				MonsterDebugger.trace(this, "DONE" );
+				FlexGlobals.topLevelApplication._progressPopUp.updatePanel( 100 );				
 				FlexGlobals.topLevelApplication.currentState = "DefaultState";
+				deleteTempFile();
 			}
 			
 		}

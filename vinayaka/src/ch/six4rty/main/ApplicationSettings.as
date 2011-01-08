@@ -124,6 +124,8 @@ package ch.six4rty.main
 			if ( _fileType == "singleFile" )
 			{				
 				_fontCollection.addItem( {url:event.target.url, fileObject:event.target, name:"loading..."} );
+				MonsterDebugger.trace(this, event.target.url, 0xff0000 );
+				MonsterDebugger.trace(this, event.target, 0xff0000 );
 				_fontQueue.append( new DataLoader( event.target.url, { name:event.target.url, format:"binary", estimatedBytes:File(event.target).size } ) );
 				_fontQueue.load( true );
 			}
@@ -150,8 +152,6 @@ package ch.six4rty.main
 				var unicodeObj:UnicodeObject = new UnicodeObject( item.label, item.data, false );
 				_unicodeArray.push( unicodeObj );
 			}
-			
-			MonsterDebugger.trace(this, _unicodeArray );
 			
 			return _unicodeArray;
 		}
@@ -190,10 +190,13 @@ package ch.six4rty.main
 		
 		protected function fontsLoaded( event:LoaderEvent ):void
 		{
-			_fontArray = [];
 			
-			for ( var i:int = 0; i < _fontQueue.content.length; i++ )
+						
+			for ( var i:int = _fontArray.length; i < _fontQueue.content.length; i++ )
 			{
+				MonsterDebugger.trace(this, LoaderMax.getContent( _fontCollection.getItemAt(i).url )  );
+				MonsterDebugger.trace(this, _fontCollection.getItemAt(i).url  );
+				
 				var _tFont:TFontCollection = TFontCollection.create( LoaderMax.getContent( _fontCollection.getItemAt(i).url ), _fontCollection.getItemAt(i).url ) ;
 				
 				var font:TFont 				= _tFont.getFont(_tFont.getFontCount() - 1);
@@ -203,7 +206,7 @@ package ch.six4rty.main
 				var version:String			= font.getNameTable().getRecordString( ID.nameVersionString );
 				
 				var fontVO:FontObject = new FontObject( name, _fontCollection.getItemAt(i).url, _fontCollection.getItemAt(i).fileObject.nativePath, style, copyright, version );
-				_fontArray.push( fontVO );
+				_fontArray[i] =  fontVO ;
 				
 				_fontCollection[i].name = name;
 				_fontCollection.refresh();
