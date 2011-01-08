@@ -44,6 +44,8 @@ package ch.six4rty.main
 		{
 			FlexGlobals.topLevelApplication.sdkLoc.text = _sharedObject.data.sdkLoc;
 			FlexGlobals.topLevelApplication.sysFontLoc.text = _sharedObject.data.fontLoc;
+			
+			_sdkLocation = _sharedObject.data.sdkLoc;
 		}
 		
 		/**
