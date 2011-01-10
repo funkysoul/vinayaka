@@ -92,6 +92,7 @@ package ch.six4rty.main
 
 		public function get sdkLocation():String
 		{
+			_sdkLocation = _sharedObject.data.sdkLoc;
 			return _sdkLocation;
 		}
 

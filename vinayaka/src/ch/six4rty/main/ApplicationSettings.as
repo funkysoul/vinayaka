@@ -71,6 +71,8 @@ package ch.six4rty.main
 			_queue.append( new XMLLoader( "_xml/SimpleUnicodeTable.xml", {name:"unicodeTable" } ) );
 			_queue.append( new XMLLoader( "_xml/wordList.xml", {name:"wordList" } ) );
 			
+			MonsterDebugger.trace(this, "initapp");
+			
 			_queue.load();
 		}
 		
@@ -190,8 +192,6 @@ package ch.six4rty.main
 		
 		protected function fontsLoaded( event:LoaderEvent ):void
 		{
-			
-						
 			for ( var i:int = _fontArray.length; i < _fontQueue.content.length; i++ )
 			{
 				MonsterDebugger.trace(this, LoaderMax.getContent( _fontCollection.getItemAt(i).url )  );

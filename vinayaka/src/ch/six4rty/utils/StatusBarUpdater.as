@@ -12,9 +12,11 @@ package ch.six4rty.utils
 		
 		public function StatusBarUpdater()
 		{
-			_timer = new Timer( 20000, 0 );
+			_timer = new Timer( 8000, 0 );
 			_timer.addEventListener( TimerEvent.TIMER, onTick );
 			_timer.start();
+			
+			FlexGlobals.topLevelApplication.status = "Thank your for using Vinayaka";
 		}
 		
 		protected function onTick(event:TimerEvent):void
@@ -24,18 +26,15 @@ package ch.six4rty.utils
 			switch ( _iteration )
 			{
 				case 1:
-					FlexGlobals.topLevelApplication.status = "Thank your for using Vinayaka";
+					FlexGlobals.topLevelApplication.status = "Bugs / Improvements? Check http://bugs.six4rty.ch";
 					break;
 				case 2:
-					FlexGlobals.topLevelApplication.status = "Bugs / Improvements?";
+					FlexGlobals.topLevelApplication.status = "Current Version 1.0.1";
 					break;
 				case 3:
-					FlexGlobals.topLevelApplication.status = "Thank your for using Vinayaka";
+					FlexGlobals.topLevelApplication.status = "Facts: Vinayaka is the alternate name of the Hindu God Ganesha";
 					break;
 				case 4:
-					FlexGlobals.topLevelApplication.status = "Thank your for using Vinayaka";
-					break;
-				case 5:
 					_iteration = 0;
 					break;
 			}

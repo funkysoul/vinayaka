@@ -35,6 +35,7 @@ package ch.six4rty.main
 		private var _asCode					:String;
 		
 		private var _commandPrompt			:String 					= "C:\\WINDOWS\\system32\\cmd.exe";
+		private var _macCommandPrompt		:String						= "";
 		private var _process				:NativeProcess;
 		private var _nativeProcessStartupInfo					:NativeProcessStartupInfo;
 			
@@ -70,10 +71,18 @@ package ch.six4rty.main
 			}
 			
 			var tempArray:Array = _appSettings.unicodeTable.filter( selectedOnly );
-			for each ( var item:UnicodeObject in tempArray )
+			if ( tempArray.length < 1 )
 			{
-				_selectedChars += item.unicodeData + ", ";
+				_selectedChars = "";
 			}
+			else
+			{
+				for each ( var item:UnicodeObject in tempArray )
+				{
+					_selectedChars += item.unicodeData + ", ";
+				}
+			}
+			
 			
 			if ( FlexGlobals.topLevelApplication.ConvertedText.text != "" )
 			{
@@ -110,7 +119,8 @@ package ch.six4rty.main
 			for each ( var item:Object in _appSettings.fontArray )
 			{
 				MonsterDebugger.trace(this, item, 0xff0000 );
-				_asCode += '\t\t[Embed(source="' + StringUtils.ReplaceBackslash( item.fontNativePath ) + '", fontFamily="' + item.fontName + '", embedAsCFF="'+ _selectedSDKVer +'", mimeType="application/x-font-truetype", unicodeRange="' +  _selectedChars  + '")]\n';
+				_asCode += '\t\t[Embed(source="' + StringUtils.ReplaceBackslash( item.fontNativePath ) + '", fontFamily="' + item.fontName + '", ' +
+					'embedAsCFF="'+ _selectedSDKVer +'", mimeType="application/x-font-truetype"' +  selectedChars  + ')]\n';
 				_asCode += "\t\tprivate var " + StringUtils.StripSpaces(item.fontName) + ":Class;\n";
 			}
 			
@@ -203,6 +213,24 @@ package ch.six4rty.main
 		{
 			var file:FileReference = new FileReference();
 			file.save( _asCode, "Vinayaka_output.as" );
-		}		
+		}	
+		
+		public function get generatedASCode():String
+		{
+			return _asCode;
+		}
+		
+		public function get selectedChars():String
+		{
+			if ( _selectedChars == "" )
+			{
+				return "";
+			}
+			else
+			{
+				return ', unicodeRange="' +  _selectedChars  + '"';
+			}
+		}
+		
 	}
 }
