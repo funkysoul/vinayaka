@@ -1,11 +1,14 @@
 package ch.six4rty.vo
 {
+	import nl.demonsters.debugger.MonsterDebugger;
+
 	public class FontObject
 	{
 		private var _fontName				:String;
 		private var _fontURL				:String;
 		private var _fontNativePath			:String;
 		private var _fontStyle				:String;
+		private var _fontWeight				:String;
 		private var _fontCopyright			:String;
 		private var _fontVersion			:String;
 		
@@ -22,11 +25,42 @@ package ch.six4rty.vo
 			_fontName						= name;
 			_fontURL						= url;
 			_fontNativePath					= nativePath
-			_fontStyle						= style;
 			_fontCopyright					= copyright;
 			_fontVersion					= version;
+			
+			MonsterDebugger.trace(this, style );
+			if ( style == "Italic" )
+			{
+				_fontStyle						= style;
+				_fontWeight						= "normal";
+			}
+			else if ( style == "Bold Italic" )
+			{
+				_fontStyle						= "italic";
+				_fontWeight						= "bold";
+			}
+			else if ( style == "Bold" )
+			{
+				_fontStyle						= "normal";
+				_fontWeight						= "bold";
+			}
+			else if ( style == "Regular" )
+			{
+				_fontStyle						= "normal";
+				_fontWeight						= "normal";
+			}			
 		}	
 		
+		public function get fontWeight():String
+		{
+			return _fontWeight;
+		}
+
+		public function set fontWeight(value:String):void
+		{
+			_fontWeight = value;
+		}
+
 		/**
 		 * 
 		 * @return 

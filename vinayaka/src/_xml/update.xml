@@ -2,11 +2,13 @@
 <update xmlns="http://ns.riaspace.com/air/framework/update/description/1.1">
         <!-- Win update -->
         <exe>
-                <version>1.0.0</version>
+                <version>1.0.1</version>
                 <url>http://blog.six4rty.ch/_projects/vinayaka/vinayaka.exe</url>
             <description>
             <![CDATA[
                 * This a Win update
+                * Fixed: Unicode issue, when not entering any unicode values, the SWF wouldn't be generated
+                * Fixed: Whitespace issue on Windows XP
                 ]]>
         </description>
         </exe>
