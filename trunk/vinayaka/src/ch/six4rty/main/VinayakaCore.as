@@ -120,7 +120,7 @@ package ch.six4rty.main
 			{
 				MonsterDebugger.trace(this, item, 0xff0000 );
 				_asCode += '\t\t[Embed(source="' + StringUtils.ReplaceBackslash( item.fontNativePath ) + '", fontFamily="' + item.fontName + '", ' +
-					'embedAsCFF="'+ _selectedSDKVer +'", mimeType="application/x-font-truetype"' +  selectedChars  + ')]\n';
+					'fontStyle="' + item.fontStyle + '", fontWeight="' + item.fontWeight + '", embedAsCFF="'+ _selectedSDKVer +'", mimeType="application/x-font-truetype"' +  selectedChars  + ')]\n';
 				_asCode += "\t\tprivate var " + StringUtils.StripSpaces(item.fontName) + ":Class;\n";
 			}
 			
