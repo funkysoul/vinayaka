@@ -7,10 +7,13 @@ package ch.six4rty.main
 	import flash.events.NativeDragEvent;
 	
 	import mx.collections.ArrayCollection;
+	import mx.controls.Alert;
 	import mx.controls.ToolTip;
 	import mx.core.FlexGlobals;
 	import mx.core.IToolTip;
 	import mx.managers.ToolTipManager;
+	
+	import nl.demonsters.debugger.MonsterDebugger;
 
 	public class MainApp
 	{
@@ -32,7 +35,12 @@ package ch.six4rty.main
 		
 		public function MainApp()
 		{
-			
+			MonsterDebugger.trace(this, prefHandler.sdkLocation );
+			if ( prefHandler.sdkLocation == null )
+			{
+				FlexGlobals.topLevelApplication.currentState = "State_Preferences";
+				Alert.show( "Please select the path to your Flex SDK where the bin folder is located", "Edit Settings", Alert.OK );
+			}
 		}
 		
 		public function displaytooltip( str:String ):void

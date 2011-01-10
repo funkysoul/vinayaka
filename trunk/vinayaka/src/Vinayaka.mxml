@@ -26,6 +26,8 @@
 			import mx.events.FlexMouseEvent;
 			import mx.managers.PopUpManager;
 			
+			import nl.demonsters.debugger.MonsterDebugger;
+			
 			[Bindable] 
 			public var _vinayaka			:MainApp
 			
@@ -35,6 +37,8 @@
 			{
 				_vinayaka						= new MainApp();
 				_vinayaka.appSettings.initApplication();
+				
+				MonsterDebugger.trace(this, "init");
 				
 				var appXML:XML = NativeApplication.nativeApplication.applicationDescriptor;
 				var air:Namespace = appXML.namespaceDeclarations()[0];
@@ -69,7 +73,6 @@
 			initialized="updater_initializer(event)"/>
 		<s:RadioButtonGroup id="radiogroup1"/>
 	</fx:Declarations>
-	
 	
 	<s:Button id="btnSelectFont" x="0" y="-1" width="204" height="50" label="Select Fonts"
 			  click="_vinayaka.stateHandler.stateChange( event )"
@@ -128,8 +131,11 @@
 	<s:Image includeIn="State_Generation" x="297" y="13" source="@Embed('images/appIcons/exp_icon_as.png')"/>
 	<s:Image includeIn="State_Generation" x="558" y="13" source="@Embed('images/appIcons/exp_icon_swc.png')"/>
 	<s:Image includeIn="State_Generation" x="828" y="13" source="@Embed('images/appIcons/exp_icon_swf.png')"/>
-	<s:Button includeIn="DefaultState" x="217" y="216" width="117" label="Add Typeface" icon="@Embed(source='images/appIcons/add.png')" click="{ _vinayaka.appSettings.chooseSingleFile() }"/>
-	<s:Button includeIn="DefaultState" x="340" y="216" width="117" label="Add Font Folder" click="{ _vinayaka.appSettings.chooseFontFolder() }"/>
+	<s:Button id="btnTypeFace" includeIn="DefaultState" x="217" y="216" width="117"
+			  label="Add Typeface" click="{ _vinayaka.appSettings.chooseSingleFile() }"
+			  icon="@Embed(source='images/appIcons/add.png')"/>
+	<s:Button id="btnFontFolder" includeIn="DefaultState" x="340" y="216" width="117"
+			  label="Add Font Folder" click="{ _vinayaka.appSettings.chooseFontFolder() }"/>
 	
 	<s:List id="UnicodeList" includeIn="State_Unicode" x="212" y="49" width="336" height="190"
 			itemRenderer="ch.six4rty.renderer.UnicodeItemRenderer">
@@ -142,8 +148,8 @@
 				editable="false"/>
 	<s:TextArea id="NormalText" includeIn="State_Unicode" x="586" y="49" width="320" height="92" change="_vinayaka.userSettings.inputTextHandler(event)"/>
 	<s:TextArea id="ConvertedText" includeIn="State_Unicode" x="586" y="168" width="320" height="71" editable="false" />
-	<s:Label includeIn="DefaultState" x="465" y="23" text="Font information"/>
-	<s:Label includeIn="DefaultState" x="219" y="23" text="Font List"/>
+	<s:Label id="FontInfoLabel" includeIn="DefaultState" x="465" y="23" text="Font information"/>
+	<s:Label id="FontListLabel" includeIn="DefaultState" x="219" y="23" text="Font List"/>
 	<s:Label includeIn="State_Unicode" x="212" y="29" text="Unicode Selection"/>
 	<s:Label includeIn="State_Unicode" x="586" y="29" text="Extra Characters"/>
 	<s:Label includeIn="State_Unicode" x="586" y="152" text="Converted Characters"/>
@@ -151,11 +157,11 @@
 	
 	<mx:Canvas id="hiddenCanvas" visible="false"/>
 	<s:RadioButton id="flex3RBSWF" includeIn="State_Generation" x="800" y="188"
-				   label="Flex 3 Compatible" groupName="swfRBG"/>
+				   label="DefineFont3 ( Flex 3 )" groupName="swfRBG"/>
 	<s:RadioButton id="flex4RBSWF" includeIn="State_Generation" x="800" y="214"
-				   label="Flex 4 Compatible" groupName="swfRBG" selected="true"/>
+				   label="DefineFont4 ( Flex 4 )" groupName="swfRBG" selected="true"/>
 	<s:RadioButton id="flex3RB" includeIn="State_Generation" x="270" y="188"
-				   label="Flex 3 Compatible" groupName="as3RBG"/>
+				   label="DefineFont3 ( Flex 3 )" groupName="as3RBG"/>
 	<s:RadioButton id="flex4RB" includeIn="State_Generation" x="270" y="214"
-				   label="Flex 4 Compatible" groupName="as3RBG" selected="true"/>
+				   label="DefineFont4 ( Flex 4 )" groupName="as3RBG" selected="true"/>
 </s:WindowedApplication>

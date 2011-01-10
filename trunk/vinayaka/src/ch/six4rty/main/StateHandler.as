@@ -12,20 +12,11 @@ package ch.six4rty.main
 		private static var instance			:StateHandler		= new StateHandler();
 		private var _prefHandler			:PreferencesHandler = PreferencesHandler.getInstance();
 		
-		/**
-		 * 
-		 * 
-		 */		
 		public function StateHandler()
 		{
 			if ( instance ) throw new Error( "Singleton can be only accessed through getInstance(); method" );
 		}
 		
-		/**
-		 * 
-		 * @return 
-		 * 
-		 */		
 		public static function getInstance():StateHandler
 		{
 			return instance;
