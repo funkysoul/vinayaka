@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table>
+	<item>
+		<label>U+0000 - U+007F: Basic Latin</label>
+		<data>U+0000-U+007F</data>
+	</item>
+	<item>
+		<label>U+0080 - U+00FF: Latin 1 Supplement</label>
+		<data>U+0080-U+00FF</data>
+	</item>
+	<item>
+		<label>U+0100 - U+017F: Latin A Extended</label>
+		<data>U+0100-U+017F</data>
+	</item>
+	<item>
+		<label>U+0180 - U+024F: Latin B Extended</label>
+		<data>U+0180-U+024F</data>
+	</item>
+	<item>
+		<label>U+0250 - U+02AF: IPA Extensions</label>
+		<data>U+0250-U+02AF</data>
+	</item>
+	<item>
+		<label>U+02B0 - U+02FF: Spacing Modifer Letters</label>
+		<data>U+02B0-U+02FF</data>
+	</item>
+	<item>
+		<label>U+0300 - U+036F: Combining Diacritical Marks</label>
+		<data>U+0300-U+036F</data>
+	</item>
+	<item>
+		<label>U+0370 - U+03FF: Greek and Coptic</label>
+		<data>U+0370-U+03FF</data>
+	</item>
+	<item>
+		<label>U+0400 - U+04FF: Cyrillic</label>
+		<data>U+0400-U+04FF</data>
+	</item>
+	<item>
+		<label>U+0500 - U+0523: Cyrillic Supplement</label>
+		<data>U+0500-U+0523</data>
+	</item>
+	<item>
+		<label>U+0531 - U+0589: Armenian</label>
+		<data>U+0530-U+0589</data>
+	</item>
+	<item>
+		<label>U+05BE - U+05F4: Hebrew</label>
+		<data>U+05BE-U+05F4</data>
+	</item>
+	<item>
+		<label>U+0600 - U+06FF: Arabic</label>
+		<data>U+0600-U+06FF</data>
+	</item>
+	<item>
+		<label>U+0700 - U+074F: Syriac</label>
+		<data>U+0700-U+074F</data>
+	</item>
+	<item>
+		<label>U+0750 - U+076D: Arabic Supplement</label>
+		<data>U+0600-U+076D</data>
+	</item>
+	<item>
+		<label>U+0780 - U+07B1: Thaana</label>
+		<data>U+0780-U+07B1</data>
+	</item>
+	<item>
+		<label>U+07C0 - U+07FA: N'Ko</label>
+		<data>U+07C0-U+07FA</data>
+	</item>
+	<item>
+		<label>U+0800 - U+083E: Samaritan</label>
+		<data>U+0800-U+083E</data>
+	</item>
+	<item>
+		<label>U+0840 - U+085F: Mandaic</label>
+		<data>U+0840-U+085F</data>
+	</item>
+	<item>
+		<label>U+0900 - U+0DFF: Indic Scripts</label>
+		<data>U+0900-U+097F</data>
+	</item>
+	<item>
+		<label>U+0E00 - U+0E5B: Thai</label>
+		<data>U+0E00-U+0E5B</data>
+	</item>
+	<item>
+		<label>U+0E80 - U+0EDD: Lao</label>
+		<data>U+0E80-U+0EDD</data>
+	</item>
+	<item>
+		<label>U+0F00 - U+0FDA: Tibetan</label>
+		<data>U+0F00-U+0FDA</data>
+	</item>
+	<item>
+		<label>U+1000 - U+109F: Myanmar</label>
+		<data>U+1000-U+109F</data>
+	</item>
+	<item>
+		<label>U+10A0 - U+10FC: Georgian</label>
+		<data>U+10A0-U+10FC</data>
+	</item>
+	<item>
+		<label>U+1100 - U+11FF: Hangul Jamo</label>
+		<data>U+1100-U+11FF</data>
+	</item>
+	<item>
+		<label>U+1200 - U+1399: Ethiopic and Supplement</label>
+		<data>U+1200-U+137C</data>
+	</item>
+	<item>
+		<label>U+13A0 - U+13F4: Cherokee</label>
+		<data>U+13A0-U+13F4</data>
+	</item>
+	<item>
+		<label>U+1400 - U+167F: Unified Canadian Aboriginal Syllabics</label>
+		<data>U+1400-U+167F</data>
+	</item>
+	<item>
+		<label>U+1900 - U+194F: Limbu</label>
+		<data>U+1900-U+194F</data>
+	</item>
+	<item>
+		<label>U+1E00 - U+1EFF: Latin Extended additional</label>
+		<data>U+1E00-U+1EFF</data>
+	</item>
+	<item>
+		<label>U+1F00 - U+1FFF: Greek Extended</label>
+		<data>U+1F00-U+1FFF</data>
+	</item>
+	<item>
+		<label>U+2000 - U+259F: General Punctuation</label>
+		<data>U+2000-U+259F</data>
+	</item>
+	<item>
+		<label>U+25A0 - U+25FF: Geometric Shapes</label>
+		<data>U+25A0-U+25FF</data>
+	</item>
+	<item>
+		<label>U+2701 - U+27BE: Dingbats</label>
+		<data>U+2701-U+27BE</data>
+	</item>
+	<item>
+		<label>U+27C0 - U+27EF: Mathematical Symbols A</label>
+		<data>U+27C0-U+27EF</data>
+	</item>
+	<item>
+		<label>U+27F0 - U+27FF: Supplemental Arrows-A</label>
+		<data>U+27F0-U+27FF</data>
+	</item>
+	<item>
+		<label>U+2C60 - U+2C7F: Latin Extended-C</label>
+		<data>U+2C60-U+2C7F</data>
+	</item>
+</table>

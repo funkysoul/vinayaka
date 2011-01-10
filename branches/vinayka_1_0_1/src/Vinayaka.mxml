@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009"
+					   xmlns:s="library://ns.adobe.com/flex/spark"
+					   xmlns:mx="library://ns.adobe.com/flex/mx"
+					   xmlns:ns="http://updater.riaspace.com/"
+					   width="979" height="276" currentState="DefaultState"
+					   applicationComplete="{updater.initialize();init()}" 
+					   >
+	
+	<s:states>
+		<s:State name="DefaultState"/>
+		<s:State name="State_Unicode"/>
+		<s:State name="State_Generation"/>
+		<s:State name="State_Preferences"/>
+	</s:states>
+	
+	<fx:Script>
+		<![CDATA[
+			import air.update.events.UpdateEvent;
+			
+			import ch.six4rty.main.MainApp;
+			import ch.six4rty.panels.ProgressPanel;
+			
+			import mx.events.CloseEvent;
+			import mx.events.FlexEvent;
+			import mx.events.FlexMouseEvent;
+			import mx.managers.PopUpManager;
+			
+			import nl.demonsters.debugger.MonsterDebugger;
+			
+			[Bindable] 
+			public var _vinayaka			:MainApp
+			
+			public var _progressPopUp		:ProgressPanel;
+						
+			private function init():void
+			{
+				_vinayaka						= new MainApp();
+				_vinayaka.appSettings.initApplication();
+				
+				MonsterDebugger.trace(this, "init");
+				
+				var appXML:XML = NativeApplication.nativeApplication.applicationDescriptor;
+				var air:Namespace = appXML.namespaceDeclarations()[0];
+				versionLabel.text = "Vinayaka - " + appXML.air::version;
+				
+				this.removeEventListener(FlexEvent.APPLICATION_COMPLETE, init );
+			}
+			
+			
+			public function showProgressPanel():void
+			{
+				_progressPopUp = ProgressPanel(PopUpManager.createPopUp( this, ProgressPanel, true ) );
+				_progressPopUp.title = "Generating Files";
+				PopUpManager.centerPopUp( _progressPopUp );
+				_progressPopUp.addEventListener( FlexMouseEvent.MOUSE_DOWN_OUTSIDE, _progressPopUp.onOutSideClick );
+				_progressPopUp.addEventListener( CloseEvent.CLOSE, _progressPopUp.onClose );
+				
+			}
+
+			protected function updater_initializer(event:UpdateEvent):void
+			{
+				updater.checkNow();
+			}
+
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<ns:NativeApplicationUpdater 
+			id="updater"
+			updateURL="http://blog.six4rty.ch/_projects/vinayaka/update.xml"
+			initialized="updater_initializer(event)"/>
+		<s:RadioButtonGroup id="radiogroup1"/>
+	</fx:Declarations>
+	
+	<s:Button id="btnSelectFont" x="0" y="-1" width="204" height="50" label="Select Fonts"
+			  click="_vinayaka.stateHandler.stateChange( event )"
+			  enabled.DefaultState="false"/>
+	<s:Button id="btnSelectUnicode" x="0" y="49" width="204" height="50" label="Select Unicode"
+			  click="_vinayaka.stateHandler.stateChange( event )"
+			 enabled.State_Unicode="false"/>
+	<s:Button id="btnSelectGenerate" x="0" y="149" width="204" height="50" label="Generate"
+			  click="_vinayaka.stateHandler.stateChange( event )"
+			  x.DefaultState="0" y.DefaultState="99"
+			  x.State_Generation="0" y.State_Generation="99" enabled.State_Generation="false"
+			  x.State_Preferences="0" y.State_Preferences="99"
+			  x.State_Unicode="0" y.State_Unicode="99"/>
+	<s:Button id="btnSelectPrefs" x="0" y="199" width="204" height="50" label="Preferences"
+			  click="_vinayaka.stateHandler.stateChange( event )"
+			  x.DefaultState="0" y.DefaultState="149"
+			  x.State_Generation="0" y.State_Generation="149"
+			  x.State_Preferences="0" y.State_Preferences="149" enabled.State_Preferences="false"
+			  x.State_Unicode="0" y.State_Unicode="149"/>
+	<s:Label includeIn="State_Preferences" x="216" y="99" fontSize="14" text="Folder to Flex SDK"/>
+	<s:TextInput id="sdkLoc" includeIn="State_Preferences" x="341" y="93" width="248"
+				 borderAlpha="0.52" borderVisible="true" enabled="true"/>
+	<s:Button id="browseSDK" includeIn="State_Preferences" x="607" y="92" label="Browse"
+			  click="_vinayaka.prefHandler.prefSDKLocation( event )"/>
+	<s:Label includeIn="State_Preferences" x="216" y="137" fontSize="14" text="System Fonts"/>
+	<s:TextInput id="sysFontLoc" includeIn="State_Preferences" x="341" y="132" width="248"
+				 borderAlpha="0.52" borderVisible="true" enabled="true"/>
+	<s:Button id="browseSysFonts" includeIn="State_Preferences" x="607" y="133" label="Browse" click="_vinayaka.prefHandler.prefSysFontLocation( event )"/>
+	<s:TextArea includeIn="State_Preferences" x="212" y="10" width="481" height="61"
+				borderVisible="false"
+				text="So that Vinayaka can use and work as flawless as possible you need to enter some extra settings. Please do this the first time you open Vinayaka."/>
+	<s:Image id="sdkInfo" includeIn="State_Preferences" x="588" y="94"
+			 rollOut="_vinayaka.hidetooltip()" rollOver="_vinayaka.displaytooltip( 'Please select the path to your Flex SDK' )"
+			 scaleMode="letterbox" smooth="false" source="images/appIcons/info.png"/>
+	<s:Image id="sdkInfo0" includeIn="State_Preferences" x="588" y="134" scaleMode="letterbox"
+			 smooth="false" source="images/appIcons/info.png" 
+			 rollOut="_vinayaka.hidetooltip()" rollOver="_vinayaka.displaytooltip( 'If you prefer to select a list from the system fonts, please enter the path here.' )"/>
+	<mx:VRule includeIn="DefaultState" x="210" y="9" width="1" height="230"/>
+	<s:List id="FontList" includeIn="DefaultState" x="217" y="42" width="240" height="170"
+			dataProvider="{_vinayaka.appSettings.fontCollection}" labelField="name" enabled="true"
+			itemRenderer="ch.six4rty.renderer.FontItemRenderer" change="_vinayaka.appSettings.getFontInformation(event)"></s:List>
+	<mx:VRule includeIn="State_Generation" x="469" y="10" width="2" height="228"/>
+	<s:Button id="GenerateBtnAS3" includeIn="State_Generation" x="227" y="90" width="213" height="94"
+			  label="Generate AS3"
+			  click="_vinayaka.coreClasses.generateFontFile(_vinayaka.coreClasses.OUTPUT_AS3)"
+			  enabled="true" fontSize="21"/>
+	<mx:VRule includeIn="State_Generation" x="729" y="10" width="2" height="228"/>
+	<s:Button id="GenerateBtnSWC" includeIn="State_Generation" x="497" y="90" width="213" height="94"
+			  label="Generate SWC"
+			  click="_vinayaka.coreClasses.generateFontFile(_vinayaka.coreClasses.OUTPUT_SWC)"
+			  enabled="false" fontSize="21"/>
+	<s:Button id="GenerateBtnSWF" includeIn="State_Generation" x="747" y="90" width="213" height="94"
+			  label="Generate SWF"
+			  click="_vinayaka.coreClasses.generateFontFile(_vinayaka.coreClasses.OUTPUT_SWF)"
+			  enabled="true" fontSize="21"/>
+	<s:Image includeIn="State_Generation" x="297" y="13" source="@Embed('images/appIcons/exp_icon_as.png')"/>
+	<s:Image includeIn="State_Generation" x="558" y="13" source="@Embed('images/appIcons/exp_icon_swc.png')"/>
+	<s:Image includeIn="State_Generation" x="828" y="13" source="@Embed('images/appIcons/exp_icon_swf.png')"/>
+	<s:Button id="btnTypeFace" includeIn="DefaultState" x="217" y="216" width="117"
+			  label="Add Typeface" click="{ _vinayaka.appSettings.chooseSingleFile() }"
+			  icon="@Embed(source='images/appIcons/add.png')"/>
+	<s:Button id="btnFontFolder" includeIn="DefaultState" x="340" y="216" width="117"
+			  label="Add Font Folder" click="{ _vinayaka.appSettings.chooseFontFolder() }"/>
+	
+	<s:List id="UnicodeList" includeIn="State_Unicode" x="212" y="49" width="336" height="190"
+			itemRenderer="ch.six4rty.renderer.UnicodeItemRenderer">
+		<mx:ArrayCollection id="unicodeAC" source="{_vinayaka.appSettings.unicodeTable}"/>
+	</s:List>
+	<mx:VRule includeIn="State_Unicode" x="564" y="10" width="4" height="228"/>
+	<s:Image x="4" y="210" source="icons/vinayaka_32x32.png"/>
+	<s:Label id="versionLabel" x="40" y="219" fontSize="15" text="Vinayaka (v1)"/>
+	<s:TextArea id="FontInfo" includeIn="DefaultState" x="465" y="43" width="305" height="169"
+				editable="false"/>
+	<s:TextArea id="NormalText" includeIn="State_Unicode" x="586" y="49" width="320" height="92" change="_vinayaka.userSettings.inputTextHandler(event)"/>
+	<s:TextArea id="ConvertedText" includeIn="State_Unicode" x="586" y="168" width="320" height="71" editable="false" />
+	<s:Label id="FontInfoLabel" includeIn="DefaultState" x="465" y="23" text="Font information"/>
+	<s:Label id="FontListLabel" includeIn="DefaultState" x="219" y="23" text="Font List"/>
+	<s:Label includeIn="State_Unicode" x="212" y="29" text="Unicode Selection"/>
+	<s:Label includeIn="State_Unicode" x="586" y="29" text="Extra Characters"/>
+	<s:Label includeIn="State_Unicode" x="586" y="152" text="Converted Characters"/>
+	<s:Label id="GlyphCount" includeIn="State_Unicode" x="929" y="333"/>
+	
+	<mx:Canvas id="hiddenCanvas" visible="false"/>
+	<s:RadioButton id="flex3RBSWF" includeIn="State_Generation" x="800" y="188"
+				   label="DefineFont3 ( Flex 3 )" groupName="swfRBG"/>
+	<s:RadioButton id="flex4RBSWF" includeIn="State_Generation" x="800" y="214"
+				   label="DefineFont4 ( Flex 4 )" groupName="swfRBG" selected="true"/>
+	<s:RadioButton id="flex3RB" includeIn="State_Generation" x="270" y="188"
+				   label="DefineFont3 ( Flex 3 )" groupName="as3RBG"/>
+	<s:RadioButton id="flex4RB" includeIn="State_Generation" x="270" y="214"
+				   label="DefineFont4 ( Flex 4 )" groupName="as3RBG" selected="true"/>
+</s:WindowedApplication>
