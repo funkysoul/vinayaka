@@ -6,6 +6,7 @@ package ch.six4rty.main
 	
 	import flash.desktop.NativeProcess;
 	import flash.desktop.NativeProcessStartupInfo;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
 	import flash.filesystem.File;
@@ -14,7 +15,9 @@ package ch.six4rty.main
 	import flash.net.FileReference;
 	import flash.net.SharedObject;
 	
+	import mx.controls.Alert;
 	import mx.core.FlexGlobals;
+	import mx.events.CloseEvent;
 	
 	import nl.demonsters.debugger.MonsterDebugger;
 
@@ -114,11 +117,8 @@ package ch.six4rty.main
 		
 			_asCode			= "package\n{\n\timport flash.display.Sprite;\n\timport flash.text.Font;\n\n\tpublic class Vinayaka extends Sprite\n\t{\n";
 			
-			MonsterDebugger.trace(this, _appSettings.fontArray );
-			
 			for each ( var item:Object in _appSettings.fontArray )
 			{
-				MonsterDebugger.trace(this, item, 0xff0000 );
 				_asCode += '\t\t[Embed(source="' + StringUtils.ReplaceBackslash( item.fontNativePath ) + '", fontFamily="' + item.fontName + '", ' +
 					'fontStyle="' + item.fontStyle + '", fontWeight="' + item.fontWeight + '", embedAsCFF="'+ _selectedSDKVer +'", mimeType="application/x-font-truetype"' +  selectedChars  + ')]\n';
 				_asCode += "\t\tprivate var " + StringUtils.StripSpaces(item.fontName) + ":Class;\n";
@@ -132,8 +132,6 @@ package ch.six4rty.main
 			}
 			
 			_asCode += '\n\t\t}\n\t}\n};';
-			
-			MonsterDebugger.trace(this, _asCode );
 			
 			if ( _selectedOutput == "as3" )
 			{
@@ -168,8 +166,6 @@ package ch.six4rty.main
 		{
 			FlexGlobals.topLevelApplication._progressPopUp.updatePanel(80);
 			
-			MonsterDebugger.trace(this, "Launch Compiler" );
-			
 			var compFile:File = new File( _preferences.sdkLocation );
 			
 			_process 	= new NativeProcess();
@@ -179,7 +175,6 @@ package ch.six4rty.main
 			
 			if ( _selectedOutput == "swf" )
 			{
-				MonsterDebugger.trace(this, _preferences.sdkLocation );
 				var compileCommand:String = '"' + _preferences.sdkLocation + "\\bin\\mxmlc" + '" '+ File.desktopDirectory.resolvePath( 'Vinayaka.as' ).nativePath + ' -output ' + File.desktopDirectory.nativePath + '\\Vinayaka.swf -static-link-runtime-shared-libraries=true';
 				
 			}
@@ -199,7 +194,6 @@ package ch.six4rty.main
 		{
 			var op:String = _process.standardOutput.readUTFBytes(_process.standardOutput.bytesAvailable);
 			
-			MonsterDebugger.trace(this, op );
 			if( op.match( "bytes" ) || op.match( "Bytes" ) || op.match( "Byte" ) )
 			{
 				FlexGlobals.topLevelApplication._progressPopUp.updatePanel( 100 );				
@@ -213,7 +207,30 @@ package ch.six4rty.main
 		{
 			var file:FileReference = new FileReference();
 			file.save( _asCode, "Vinayaka_output.as" );
+			Alert.show( "Do you want to preview the fonts?", "Display preview?", Alert.YES | Alert.NO, FlexGlobals.topLevelApplication.nativeWindow.stage as Sprite, onAlertClose );
 		}	
+		
+		private function onAlertClose( event:CloseEvent ):void
+		{
+			switch ( event.detail )
+			{
+				case Alert.YES:
+					createPreviewSWF();
+					break;
+				case Alert.NO:
+					//
+					break;
+			}
+		}
+		
+		
+		private function createPreviewSWF():void
+		{
+			FlexGlobals.topLevelApplication.displayPreviewWindow();
+			var previewHandler:PreviewHandler = new PreviewHandler( "as3" );
+			FlexGlobals.topLevelApplication.updatePreviewProgress( 20 );
+			
+		}
 		
 		public function get generatedASCode():String
 		{

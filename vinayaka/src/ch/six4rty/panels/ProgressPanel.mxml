@@ -51,7 +51,9 @@
 			
 			public function previewOutput(e:FlexMouseEvent = null ):void
 			{
-				var previewHandler:PreviewHandler = new PreviewHandler();
+				FlexGlobals.topLevelApplication.displayPreviewWindow();
+				var previewHandler:PreviewHandler = new PreviewHandler( "as3" );
+				FlexGlobals.topLevelApplication.updatePreviewProgress( 20 );
 				
 			}
 			
