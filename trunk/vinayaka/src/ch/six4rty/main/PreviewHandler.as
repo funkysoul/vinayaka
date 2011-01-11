@@ -14,6 +14,7 @@ package ch.six4rty.main
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	
+	import mx.controls.Text;
 	import mx.core.FlexGlobals;
 	
 	import nl.demonsters.debugger.MonsterDebugger;
@@ -32,13 +33,23 @@ package ch.six4rty.main
 		private var _process									:NativeProcess;
 		private var _nativeProcessStartupInfo					:NativeProcessStartupInfo;
 
-		public function PreviewHandler()
+		public function PreviewHandler( str:String )
 		{
-			generateFontFile();
+			if ( str == "as3" )
+			{
+				generateFontFile();
+			}
+			else
+			{
+				generateFontFile();
+			}
+			
 		}
 		
 		protected function generateFontFile():void
 		{			
+			FlexGlobals.topLevelApplication.updatePreviewProgress( 30 );
+			
 			if ( FlexGlobals.topLevelApplication.flex3RB.selected || FlexGlobals.topLevelApplication.flex3RBSWF.selected )
 			{
 				_selectedSDKVer = false;
@@ -67,11 +78,7 @@ package ch.six4rty.main
 				StringUtils.RemoveLastSeparator( _selectedChars );
 				_selectedChars += FlexGlobals.topLevelApplication.ConvertedText.text;
 			}
-			
-			FlexGlobals.topLevelApplication.showProgressPanel();
-			FlexGlobals.topLevelApplication._progressPopUp.updatePanel(20);
-			
-			
+						
 			createASTemplate();
 		}		
 		
@@ -83,11 +90,9 @@ package ch.six4rty.main
 		private function createASTemplate():void
 		{
 			
-			FlexGlobals.topLevelApplication._progressPopUp.updatePanel(40);
-						
-			_asCode			= "package\n{\n\timport flash.display.Sprite;\n\timport flash.text.Font;\n\timport flash.text.TextField;\n\timport flash.text.TextFormat;\n\n\tpublic class Vinayaka_preview extends Sprite\n\t{\n";
+			FlexGlobals.topLevelApplication.updatePreviewProgress( 50 );
 			
-			MonsterDebugger.trace(this, _appSettings.fontArray );
+			_asCode			= "package\n{\n\timport flash.display.Sprite;\n\t;import flash.text.TextFieldAutoSize;\n\timport flash.text.Font;\n\timport flash.text.TextField;\n\timport flash.text.TextFormat;\n\n\tpublic class Vinayaka_preview extends Sprite\n\t{\n";
 			
 			for each ( var item:Object in _appSettings.fontArray )
 			{
@@ -114,11 +119,13 @@ package ch.six4rty.main
 				_asCode += '\t\t\tvar tFormat' + i + ':TextFormat = new TextFormat();\n\t' +
 					'tFormat' + i + '.font = "' + _appSettings.fontArray[i].fontName + '";\n\t' +
 					'tFormat' + i + '.color = 0x000000;\n\t' +
-					'tFormat' + i + '.size = 16;\n\t';
+					'tFormat' + i + '.size = 18;\n\t';
 				
 				_asCode += '\t\t\tvar tField' + i + ':TextField = new TextField();\n\t' +
-					'tField' + i + '.text = "' +_appSettings.fontArray[i].fontName + '";\n\t' +
+					'tField' + i + '.autoSize = TextFieldAutoSize.LEFT;\n\t' + 
 					'tField' + i + '.defaultTextFormat = tFormat' + i + ';\n\t' + 
+					'tField' + i + '.width = ' + 450 + ';\n\t' + 
+					'tField' + i + '.text = "' +_appSettings.fontArray[i].fontName + '";\n\t' +
 					'addChild(tField' + i + ');\n\t' +
 					'tField' + i + '.y = ' + i * 30 + ';\n\t';
 			}
@@ -132,8 +139,8 @@ package ch.six4rty.main
 		}
 		
 		private function saveTempFile():void
-		{
-			FlexGlobals.topLevelApplication._progressPopUp.updatePanel(60);
+		{			
+			FlexGlobals.topLevelApplication.updatePreviewProgress( 70 );
 			
 			var file:File = File.desktopDirectory.resolvePath( "Vinayaka_preview.as" );
 			var fileStream:FileStream = new FileStream();
@@ -151,8 +158,8 @@ package ch.six4rty.main
 		}
 		
 		protected final function launchCompiler( e:Event ):void
-		{
-			FlexGlobals.topLevelApplication._progressPopUp.updatePanel(80);
+		{	
+			FlexGlobals.topLevelApplication.updatePreviewProgress( 80 );
 			
 			MonsterDebugger.trace(this, "Launch Compiler" );
 			
@@ -178,7 +185,7 @@ package ch.six4rty.main
 			MonsterDebugger.trace(this, op );
 			if( op.match( "bytes" ) || op.match( "Bytes" ) || op.match( "Byte" ) )
 			{
-				FlexGlobals.topLevelApplication._progressPopUp.displaySWF( File.desktopDirectory.nativePath );
+				FlexGlobals.topLevelApplication.updatePreviewProgress( 100 );
 				deleteTempFile();
 			}
 			

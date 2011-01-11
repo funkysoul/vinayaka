@@ -19,8 +19,13 @@
 			import air.update.events.UpdateEvent;
 			
 			import ch.six4rty.main.MainApp;
+			import ch.six4rty.main.NativeWindowManager;
 			import ch.six4rty.panels.ProgressPanel;
 			
+			import mx.controls.ProgressBar;
+			import mx.controls.ProgressBarMode;
+			import mx.controls.SWFLoader;
+			import mx.events.AIREvent;
 			import mx.events.CloseEvent;
 			import mx.events.FlexEvent;
 			import mx.events.FlexMouseEvent;
@@ -28,8 +33,14 @@
 			
 			import nl.demonsters.debugger.MonsterDebugger;
 			
+			import spark.components.Window;
+			
 			[Bindable] 
-			public var _vinayaka			:MainApp
+			public var _vinayaka			:MainApp;
+			
+			private var _progressBar		:ProgressBar;
+			private var _swfLoader			:SWFLoader;
+			private var _secondWindow		:Window;
 			
 			public var _progressPopUp		:ProgressPanel;
 						
@@ -37,9 +48,7 @@
 			{
 				_vinayaka						= new MainApp();
 				_vinayaka.appSettings.initApplication();
-				
-				MonsterDebugger.trace(this, "init");
-				
+												
 				var appXML:XML = NativeApplication.nativeApplication.applicationDescriptor;
 				var air:Namespace = appXML.namespaceDeclarations()[0];
 				versionLabel.text = "Vinayaka - " + appXML.air::version;
@@ -61,6 +70,68 @@
 			protected function updater_initializer(event:UpdateEvent):void
 			{
 				updater.checkNow();
+			}
+			
+			public function displayPreviewWindow():void
+			{
+				_swfLoader = new SWFLoader();
+				_swfLoader.id = "previewLoader";
+				
+				_progressBar = new ProgressBar();
+				_progressBar.mode = ProgressBarMode.MANUAL;
+				_progressBar.indeterminate = false;
+				_progressBar.minimum = 0;
+				_progressBar.maximum = 100;
+				_progressBar.label = "generating preview";
+				
+				_secondWindow = new Window();
+				_secondWindow.title = "Vinayaka - Preview";
+				_secondWindow.width = 450;
+				_secondWindow.height = 200;
+				_secondWindow.open( true );
+				_secondWindow.addElement( _progressBar );
+				this.addEventListener(AIREvent.WINDOW_COMPLETE, onWindowComplete );
+				this.addEventListener( Event.CLOSE,closeAllWindows );
+			}
+			
+			public function updatePreviewProgress(val:Number):void
+			{
+				_progressBar.setProgress( val, 100 );
+				
+				if ( val == 100 )
+				{
+					_swfLoader.source = File.desktopDirectory.resolvePath( "Vinayaka_preview.swf").nativePath;
+					_swfLoader.addEventListener(Event.COMPLETE, onSWFComplete );
+					_swfLoader.load();
+				}
+			}
+
+
+			protected function closeAllWindows(event:Event):void
+			{
+				event.preventDefault();
+				
+				File.desktopDirectory.resolvePath( "Vinayaka_preview.swf").deleteFile();
+				
+				for ( var i:int = NativeApplication.nativeApplication.openedWindows.length - 1; i>=0; --i)
+				{
+					var closeWin:NativeWindow = NativeApplication.nativeApplication.openedWindows[i] as NativeWindow;
+					closeWin.close();
+				}
+			}
+
+
+			protected function onSWFComplete(event:Event):void
+			{
+				_secondWindow.addElement( _swfLoader );
+				_secondWindow.removeElement( _progressBar );
+			}
+
+
+			protected function onWindowComplete(event:AIREvent):void
+			{
+				event.currentTarget.x = Screen.mainScreen.visibleBounds.width / 2;
+				event.currentTarget.y = Screen.mainScreen.visibleBounds.height / 2;
 			}
 
 		]]>
