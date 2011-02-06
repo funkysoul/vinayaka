@@ -38,7 +38,7 @@ package ch.six4rty.main
 		private var _asCode					:String;
 		
 		private var _commandPrompt			:String 					= "C:\\WINDOWS\\system32\\cmd.exe";
-		private var _macCommandPrompt		:String						= "";
+		private var _macCommandPrompt		:String						= "/Applications/Utilities/Terminal.app/";
 		private var _process				:NativeProcess;
 		private var _nativeProcessStartupInfo					:NativeProcessStartupInfo;
 			

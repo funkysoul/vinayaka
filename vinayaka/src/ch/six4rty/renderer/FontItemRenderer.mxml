@@ -10,7 +10,10 @@
 	<fx:Script>
 		<![CDATA[
 			import mx.controls.Alert;
+			import mx.core.FlexGlobals;
 			import mx.events.CloseEvent;
+			
+			import nl.demonsters.debugger.MonsterDebugger;
 			
 			protected function btn_mouseDownHandler(event:MouseEvent):void
 			{
@@ -27,7 +30,10 @@
 				{
 					case Alert.YES:
 					case Alert.OK:
+						FlexGlobals.topLevelApplication._vinayaka.appSettings.fontArray.splice( itemIndex, 1 );
 						Object( owner ).dataProvider.removeItemAt( itemIndex );
+						MonsterDebugger.trace(this, FlexGlobals.topLevelApplication._vinayaka.appSettings.fontArray );
+						
 						break;
 					case Alert.CANCEL:
 					case Alert.NO:
