@@ -39,5 +39,18 @@ package ch.six4rty.utils
 		{
 			return originalString.slice( 0, -2 );
 		}
+		
+		/**
+		 * 
+		 * @return 
+		 * 
+		 */		
+		public static function RemoveSpecialChar( originalString:String ):String
+		{
+			var temp:String = originalString;
+			temp.replace(/[^a-zA-Z 0-9]+/g,'');
+			var temp1:String = StripSpaces( temp );
+			return temp1;
+		}
 	}
 }
