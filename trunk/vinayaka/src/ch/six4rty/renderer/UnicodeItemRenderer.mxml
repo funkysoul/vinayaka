@@ -19,6 +19,6 @@
 
 		]]>
 	</fx:Script>
-	<s:CheckBox id="irCB" width="16" height="16" change="onChange(event)"/>
+	<s:CheckBox id="irCB" width="16" height="16" click="onChange(event)"/>
 	<s:Label text="{data.unicodeLabel}" height="16" verticalAlign="middle" />
 </s:ItemRenderer>
