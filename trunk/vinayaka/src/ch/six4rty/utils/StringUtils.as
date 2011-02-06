@@ -1,5 +1,7 @@
 package ch.six4rty.utils
 {
+	import nl.demonsters.debugger.MonsterDebugger;
+
 	public class StringUtils
 	{
 		/**
@@ -47,10 +49,10 @@ package ch.six4rty.utils
 		 */		
 		public static function RemoveSpecialChar( originalString:String ):String
 		{
-			var temp:String = originalString;
-			temp.replace(/[^a-zA-Z 0-9]+/g,'');
-			var temp1:String = StripSpaces( temp );
-			return temp1;
+			var pattern:RegExp = /[\[\\\^\$\.\|\?\*\+\(\)\{\}\,\-\_\[\]\.\s]/g; 
+			var temp:String = originalString.replace( pattern, "" );
+			MonsterDebugger.trace(StringUtils, temp, 0xff0000 );
+			return temp;
 		}
 	}
 }

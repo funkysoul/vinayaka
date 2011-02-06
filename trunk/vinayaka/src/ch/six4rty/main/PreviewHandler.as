@@ -99,14 +99,14 @@ package ch.six4rty.main
 				MonsterDebugger.trace(this, item, 0xff0000 );
 				_asCode += '\t\t[Embed(source="' + StringUtils.ReplaceBackslash( item.fontNativePath ) + '", fontFamily="' + item.fontName + '", ' +
 					'fontStyle="' + item.fontStyle + '", fontWeight="' + item.fontWeight + '", embedAsCFF="'+ _selectedSDKVer +'", mimeType="application/x-font-truetype"' +  selectedChars  + ')]\n';
-				_asCode += "\t\tprivate var " + StringUtils.StripSpaces(item.fontName) + ":Class;\n";
+				_asCode += "\t\tprivate var " + StringUtils.RemoveSpecialChar(item.fontName) + ":Class;\n";
 			}
 			
 			_asCode += '\n\t\tpublic function Vinayaka_preview()\n\t\t{\n';
 			
 			for each ( var itemFont:Object in _appSettings.fontArray )
 			{
-				_asCode += '\t\t\tFont.registerFont(' +  StringUtils.StripSpaces(itemFont.fontName) + ');\n';
+				_asCode += '\t\t\tFont.registerFont(' +  StringUtils.RemoveSpecialChar(itemFont.fontName) + ');\n';
 			}
 			_asCode += '\t\tcreateTextFields();';
 			_asCode += '\n\t\t}\n';
